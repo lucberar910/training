@@ -14,7 +14,7 @@ protocol GalleryViewControllerDelegate: class {
 class GalleryViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource,
                                 UISearchBarDelegate {
     
-    // COMPOSITIONAL LAYOUT
+    // COMPOSITIONAL LAYOUTT
     let compositionalLayout: UICollectionViewCompositionalLayout = {
         let fraction: CGFloat = 1 / 3
         let inset: CGFloat = 2.5
