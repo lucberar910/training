@@ -176,13 +176,9 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
         if let string = children?.data.url{
             let url = URL(string: string)
             c.imageView.kf.setImage(with: url, placeholder: UIImage(systemName: "pencil.and.outline"))
-        }
-        else {
+        } else {
             c.imageView.image = nil
-            
         }
-        
-        //c.imageView.image = feedElement.image
         
         return c
     }

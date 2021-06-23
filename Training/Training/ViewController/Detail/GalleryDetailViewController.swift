@@ -10,11 +10,18 @@ import UIKit
 class GalleryDetailViewController: UIViewController {
 
     @IBOutlet weak var imageView: UIImageView?
-    var feedElement : FeedElement? 
+    var feedElement : Children?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        imageView?.image = feedElement?.image
+    
+        if let string = feedElement?.data.url {
+            let url = URL(string: string)
+            self.imageView!.kf.setImage(with: url, placeholder: UIImage(systemName: "pencil.and.outline"))
+        } else {
+            self.imageView!.image = nil
+        }
+        
     }
 
 }
