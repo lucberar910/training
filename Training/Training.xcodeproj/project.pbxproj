@@ -31,6 +31,7 @@
 		DE6911102682317F005BF23A /* BackgroundDecorationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE69110E2682317F005BF23A /* BackgroundDecorationView.xib */; };
 		DE691113268326DF005BF23A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE691112268326DF005BF23A /* NetworkManager.swift */; };
 		DE69111626832931005BF23A /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = DE69111526832931005BF23A /* Alamofire */; };
+		DE69111826833BEA005BF23A /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE69111726833BEA005BF23A /* NotificationNames.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +60,7 @@
 		DE69110D2682317F005BF23A /* BackgroundDecorationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundDecorationView.swift; sourceTree = "<group>"; };
 		DE69110E2682317F005BF23A /* BackgroundDecorationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BackgroundDecorationView.xib; sourceTree = "<group>"; };
 		DE691112268326DF005BF23A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		DE69111726833BEA005BF23A /* NotificationNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				DE691112268326DF005BF23A /* NetworkManager.swift */,
+				DE69111726833BEA005BF23A /* NotificationNames.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -271,6 +274,7 @@
 				DE69110B26822B2E005BF23A /* HeaderSupplementaryView.swift in Sources */,
 				DE691113268326DF005BF23A /* NetworkManager.swift in Sources */,
 				DE6911072682279B005BF23A /* NewBannerSupplementaryView.swift in Sources */,
+				DE69111826833BEA005BF23A /* NotificationNames.swift in Sources */,
 				DE0B29AD2681D9CF0056862E /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

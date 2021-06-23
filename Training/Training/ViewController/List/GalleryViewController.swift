@@ -188,6 +188,16 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
     // tasto cerca
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         NetworkManager.shared.search(searchField.text!)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.dataFetched),
+                                               name: NSNotification.Name(rawValue: NotificationNames.getData.rawValue),
+                                               object: nil)
+    }
+    
+    @objc func dataFetched(n : Notification){
+        if n.userInfo!["esito"] as! Bool {
+            let data : Reddit = n.userInfo!["data"] as! Reddit
+        }
     }
 
 }

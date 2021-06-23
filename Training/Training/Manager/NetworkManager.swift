@@ -31,7 +31,12 @@ class NetworkManager {
                     var response : Reddit?
                     let decoder = JSONDecoder()
                     response = try decoder.decode(Reddit.self, from: data)
-                    print(response)
+                    
+                    // callback view controller
+                    NotificationCenter.default.post(name: NSNotification.Name(
+                                                        rawValue : NotificationNames.getData.rawValue),
+                                                        object: nil,
+                                                        userInfo: [ "esito" : true, "data" : response ])
                 } catch let error {
                     print(error)
                 }
