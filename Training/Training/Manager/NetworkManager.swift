@@ -12,33 +12,31 @@ import UIKit
 class NetworkManager {
     static let shared = NetworkManager()
     
-    func search(_ text : String) {
+    func search(_ text : String, completion : @escaping (Result<Reddit,Error>) -> Void) {
         var request : String = "https://www.reddit.com/r/key_search/top.json"
         request = request.replacingOccurrences(of: "key_search", with: text)
-        let params : [String : Any] = [:]
         
         AF.request(request)
             .validate(statusCode: 200..<300)
             .response {
                 response in
                 guard let data = response.data, response.error == nil else {
-                    let a = UIAlertController(title: "Attenzione", message: "Errore nel recupero dei dati", preferredStyle: .alert)
-                    a.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                    //self.present(a, animated: true, completion: nil)
+                    completion(Result.failure(response.error as! Error))
                     return
                 }
                 do {
                     var response : Reddit?
                     let decoder = JSONDecoder()
                     response = try decoder.decode(Reddit.self, from: data)
+                    completion(Result.success(response!))
                     
-                    // callback view controller
-                    NotificationCenter.default.post(name: NSNotification.Name(
-                                                        rawValue : NotificationNames.getData.rawValue),
-                                                        object: nil,
-                                                        userInfo: [ "esito" : true, "data" : response ])
+//                    // callback view controller
+//                    NotificationCenter.default.post(name: NSNotification.Name(
+//                                                        rawValue : NotificationNames.getData.rawValue),
+//                                                        object: nil,
+//                                                        userInfo: [ "esito" : true, "data" : response ])
                 } catch let error {
-                    print(error)
+                    completion(Result.failure(error))
                 }
             }
     }

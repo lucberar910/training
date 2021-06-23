@@ -148,13 +148,14 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
     weak var delegate: GalleryViewControllerDelegate?
     
     var feedElements : [FeedElement] = []
+    var reddit : Reddit?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.galleryCollectionView.dataSource = self
         self.galleryCollectionView.delegate = self
         self.searchField.delegate = self
-        self.feedElements = MockupData.getData() // mockup data
+        //self.feedElements = MockupData.getData() // mockup data
         
         // supplementary item (banner sopra gli item)
         self.galleryCollectionView.register(UINib(nibName: "NewBannerSupplementaryView", bundle: nil), forSupplementaryViewOfKind: "new-banner", withReuseIdentifier: "NewBannerSupplementaryView")
@@ -169,9 +170,10 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let feedElement = self.feedElements[indexPath.row]
+        let feedElement = self.reddit?.data.children[indexPath.row]
         let c = galleryCollectionView.dequeueReusableCell(withReuseIdentifier: "GalleryItemCollectionViewCell", for: indexPath) as! GalleryItemCollectionViewCell
-        c.imageView.image = feedElement.image
+        //c.imageView.image = feedElement.image
+        
         return c
     }
     
@@ -179,25 +181,19 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
         let feedElement = self.feedElements[indexPath.row]
         delegate?.galleryViewControllerDidSelectElement(feedElement)
     }
-        
-//    // per ogni carattere modificato
-//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//
-//    }
     
     // tasto cerca
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        NetworkManager.shared.search(searchField.text!)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.dataFetched),
-                                               name: NSNotification.Name(rawValue: NotificationNames.getData.rawValue),
-                                               object: nil)
-    }
-    
-    @objc func dataFetched(n : Notification){
-        if n.userInfo!["esito"] as! Bool {
-            let data : Reddit = n.userInfo!["data"] as! Reddit
+        NetworkManager.shared.search(searchField.text!) { [weak self] result in
+            switch result {
+                case .success(let reddit):
+                    self?.reddit = reddit
+                    self?.galleryCollectionView.reloadData()
+                case .failure(let error):
+                    () // alert view
+            }
         }
     }
+    
 
 }
