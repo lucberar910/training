@@ -187,7 +187,7 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     // tasto cerca
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print("aaa")
+        NetworkManager.shared.search(searchField.text!)
     }
 
 }
