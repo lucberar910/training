@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import Kingfisher
 
 protocol GalleryViewControllerDelegate: class {
-  func galleryViewControllerDidSelectElement(_ selectedElement: FeedElement)
+  func galleryViewControllerDidSelectElement(_ selectedElement: Children)
 }
 
 class GalleryViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource,
@@ -147,7 +148,7 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
     @IBOutlet weak var searchField: UISearchBar!
     weak var delegate: GalleryViewControllerDelegate?
     
-    var feedElements : [FeedElement] = []
+    
     var reddit : Reddit?
     
     override func viewDidLoad() {
@@ -166,20 +167,31 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.feedElements.count
+        return self.reddit?.data.children.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let feedElement = self.reddit?.data.children[indexPath.row]
+        let children = self.reddit?.data.children[indexPath.row]
         let c = galleryCollectionView.dequeueReusableCell(withReuseIdentifier: "GalleryItemCollectionViewCell", for: indexPath) as! GalleryItemCollectionViewCell
+        if let string = children?.data.url{
+            let url = URL(string: string)
+            c.imageView.kf.setImage(with: url, placeholder: UIImage(systemName: "pencil.and.outline"))
+        }
+        else {
+            c.imageView.image = nil
+            
+        }
+        
         //c.imageView.image = feedElement.image
         
         return c
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let feedElement = self.feedElements[indexPath.row]
-        delegate?.galleryViewControllerDidSelectElement(feedElement)
+        if let item = self.reddit?.data.children[indexPath.row] {
+            delegate?.galleryViewControllerDidSelectElement(item)
+        }
+        
     }
     
     // tasto cerca

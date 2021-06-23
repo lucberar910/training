@@ -19,7 +19,7 @@ class MainCoordinator : Coordinator {
 }
 
 extension MainCoordinator: GalleryViewControllerDelegate {
-    func galleryViewControllerDidSelectElement(_ selectedElement: FeedElement) {
+    func galleryViewControllerDidSelectElement(_ selectedElement: Children) {
         let galleryDetailViewController = GalleryDetailViewController()
         galleryDetailViewController.feedElement = selectedElement
         navController.pushViewController(galleryDetailViewController, animated: true)
