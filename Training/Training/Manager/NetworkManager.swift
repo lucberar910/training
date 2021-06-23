@@ -13,18 +13,11 @@ class NetworkManager {
     static let shared = NetworkManager()
     
     func search(_ text : String) {
-//        let request : String = "https://www.reddit.com/r/{search}/top.json"
-        let request : String = "https://www.reddit.com/r/juve/top.json"
+        var request : String = "https://www.reddit.com/r/key_search/top.json"
+        request = request.replacingOccurrences(of: "key_search", with: text)
         let params : [String : Any] = [:]
-//        [
-//            "lat" : posizione!.latitude,
-//            "lon" : posizione!.longitude,
-//            "cnt" : 16,
-//            "appid" : apiKey,
-//            "units" : "metric"
-//        ]
         
-        AF.request(request, parameters: params)
+        AF.request(request)
             .validate(statusCode: 200..<300)
             .response {
                 response in
@@ -38,6 +31,7 @@ class NetworkManager {
                     var response : Reddit?
                     let decoder = JSONDecoder()
                     response = try decoder.decode(Reddit.self, from: data)
+                    print(response)
                 } catch let error {
                     print(error)
                 }
