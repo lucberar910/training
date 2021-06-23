@@ -11,7 +11,17 @@ struct MockupData {
         FeedElement("juve", #imageLiteral(resourceName: "juve")),
         FeedElement("inter", #imageLiteral(resourceName: "inter")),
         FeedElement("milan", #imageLiteral(resourceName: "milan")),
-        FeedElement("roma", #imageLiteral(resourceName: "roma"))
+        FeedElement("roma", #imageLiteral(resourceName: "roma")),
+        FeedElement("fiorentina", #imageLiteral(resourceName: "fiorentina")),
+        FeedElement("atalanta", #imageLiteral(resourceName: "atalanta")),
+        FeedElement("lazio", #imageLiteral(resourceName: "lazio")),
+        FeedElement("bologna", #imageLiteral(resourceName: "bologna")),
+        FeedElement("cagliari", #imageLiteral(resourceName: "cagliari")),
+        FeedElement("genoa", #imageLiteral(resourceName: "genoa")),
+        FeedElement("napoli", #imageLiteral(resourceName: "napoli")),
+        FeedElement("sampdoria", #imageLiteral(resourceName: "sampdoria")),
+        FeedElement("torino", #imageLiteral(resourceName: "torino")),
+        FeedElement("udinese", #imageLiteral(resourceName: "udinese"))
     ]
     
     static func getData() -> [FeedElement] {

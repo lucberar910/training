@@ -23,6 +23,12 @@
 		DE6910FB26820C9A005BF23A /* CVLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6910FA26820C9A005BF23A /* CVLayout.swift */; };
 		DE691100268212F4005BF23A /* GalleryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6910FE268212F4005BF23A /* GalleryDetailViewController.swift */; };
 		DE691101268212F4005BF23A /* GalleryDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE6910FF268212F4005BF23A /* GalleryDetailViewController.xib */; };
+		DE6911072682279B005BF23A /* NewBannerSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6911052682279B005BF23A /* NewBannerSupplementaryView.swift */; };
+		DE6911082682279B005BF23A /* NewBannerSupplementaryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE6911062682279B005BF23A /* NewBannerSupplementaryView.xib */; };
+		DE69110B26822B2E005BF23A /* HeaderSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE69110926822B2E005BF23A /* HeaderSupplementaryView.swift */; };
+		DE69110C26822B2E005BF23A /* HeaderSupplementaryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE69110A26822B2E005BF23A /* HeaderSupplementaryView.xib */; };
+		DE69110F2682317F005BF23A /* BackgroundDecorationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE69110D2682317F005BF23A /* BackgroundDecorationView.swift */; };
+		DE6911102682317F005BF23A /* BackgroundDecorationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE69110E2682317F005BF23A /* BackgroundDecorationView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +50,12 @@
 		DE6910FA26820C9A005BF23A /* CVLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVLayout.swift; sourceTree = "<group>"; };
 		DE6910FE268212F4005BF23A /* GalleryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryDetailViewController.swift; sourceTree = "<group>"; };
 		DE6910FF268212F4005BF23A /* GalleryDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GalleryDetailViewController.xib; sourceTree = "<group>"; };
+		DE6911052682279B005BF23A /* NewBannerSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewBannerSupplementaryView.swift; sourceTree = "<group>"; };
+		DE6911062682279B005BF23A /* NewBannerSupplementaryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewBannerSupplementaryView.xib; sourceTree = "<group>"; };
+		DE69110926822B2E005BF23A /* HeaderSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderSupplementaryView.swift; sourceTree = "<group>"; };
+		DE69110A26822B2E005BF23A /* HeaderSupplementaryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderSupplementaryView.xib; sourceTree = "<group>"; };
+		DE69110D2682317F005BF23A /* BackgroundDecorationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundDecorationView.swift; sourceTree = "<group>"; };
+		DE69110E2682317F005BF23A /* BackgroundDecorationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BackgroundDecorationView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +113,7 @@
 		DE6910EC2681F5D2005BF23A /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				DE69110426822712005BF23A /* CompositionLayout */,
 				DE6910FD268212BC005BF23A /* Detail */,
 				DE6910FC268212AC005BF23A /* List */,
 			);
@@ -135,6 +148,19 @@
 				DE6910FF268212F4005BF23A /* GalleryDetailViewController.xib */,
 			);
 			path = Detail;
+			sourceTree = "<group>";
+		};
+		DE69110426822712005BF23A /* CompositionLayout */ = {
+			isa = PBXGroup;
+			children = (
+				DE6911052682279B005BF23A /* NewBannerSupplementaryView.swift */,
+				DE6911062682279B005BF23A /* NewBannerSupplementaryView.xib */,
+				DE69110926822B2E005BF23A /* HeaderSupplementaryView.swift */,
+				DE69110A26822B2E005BF23A /* HeaderSupplementaryView.xib */,
+				DE69110D2682317F005BF23A /* BackgroundDecorationView.swift */,
+				DE69110E2682317F005BF23A /* BackgroundDecorationView.xib */,
+			);
+			path = CompositionLayout;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -194,10 +220,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE6911102682317F005BF23A /* BackgroundDecorationView.xib in Resources */,
 				DE6910F926820BEE005BF23A /* GalleryItemCollectionViewCell.xib in Resources */,
 				DE0B29B72681D9D30056862E /* LaunchScreen.storyboard in Resources */,
 				DE691101268212F4005BF23A /* GalleryDetailViewController.xib in Resources */,
+				DE6911082682279B005BF23A /* NewBannerSupplementaryView.xib in Resources */,
 				DE6910F02681F643005BF23A /* GalleryViewController.xib in Resources */,
+				DE69110C26822B2E005BF23A /* HeaderSupplementaryView.xib in Resources */,
 				DE0B29B42681D9D30056862E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -215,10 +244,13 @@
 				DE6910F3268206EE005BF23A /* FeedElement.swift in Sources */,
 				DE0B29AB2681D9CF0056862E /* AppDelegate.swift in Sources */,
 				DE6910F826820BED005BF23A /* GalleryItemCollectionViewCell.swift in Sources */,
+				DE69110F2682317F005BF23A /* BackgroundDecorationView.swift in Sources */,
 				DE6910F526820738005BF23A /* MockupData.swift in Sources */,
 				DE6910EF2681F643005BF23A /* GalleryViewController.swift in Sources */,
 				DE691100268212F4005BF23A /* GalleryDetailViewController.swift in Sources */,
 				DE6910EB2681F41F005BF23A /* MainCoordinator.swift in Sources */,
+				DE69110B26822B2E005BF23A /* HeaderSupplementaryView.swift in Sources */,
+				DE6911072682279B005BF23A /* NewBannerSupplementaryView.swift in Sources */,
 				DE0B29AD2681D9CF0056862E /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

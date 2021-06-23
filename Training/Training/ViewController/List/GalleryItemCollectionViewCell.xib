@@ -18,17 +18,17 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LiV-sR-ARV">
-                        <rect key="frame" x="20" y="20" width="393" height="251"/>
+                        <rect key="frame" x="0.0" y="0.0" width="433" height="291"/>
                     </imageView>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
-            <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="LiV-sR-ARV" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="3U1-lg-hYq"/>
-                <constraint firstItem="LiV-sR-ARV" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="5OJ-ba-XH0"/>
-                <constraint firstAttribute="trailing" secondItem="LiV-sR-ARV" secondAttribute="trailing" constant="20" id="SwK-eV-SvN"/>
-                <constraint firstAttribute="bottom" secondItem="LiV-sR-ARV" secondAttribute="bottom" constant="20" id="UbV-Ot-5ae"/>
+                <constraint firstAttribute="trailing" secondItem="LiV-sR-ARV" secondAttribute="trailing" id="9bb-Fh-AL2"/>
+                <constraint firstAttribute="bottom" secondItem="LiV-sR-ARV" secondAttribute="bottom" id="DdD-0T-9Lk"/>
+                <constraint firstItem="LiV-sR-ARV" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="UWR-6m-Sju"/>
+                <constraint firstItem="LiV-sR-ARV" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="njA-S7-d6Q"/>
             </constraints>
             <size key="customSize" width="433" height="291"/>
             <connections>
@@ -38,7 +38,7 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <systemColor name="secondarySystemGroupedBackgroundColor">
+        <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
