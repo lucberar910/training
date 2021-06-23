@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		863E1F02268345FB008F2F8C /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 863E1F01268345FB008F2F8C /* Kingfisher */; };
+		863E1F0426837321008F2F8C /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863E1F0326837321008F2F8C /* UserDefaultManager.swift */; };
 		DE0B29AB2681D9CF0056862E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B29AA2681D9CF0056862E /* AppDelegate.swift */; };
 		DE0B29AD2681D9CF0056862E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B29AC2681D9CF0056862E /* SceneDelegate.swift */; };
 		DE0B29AF2681D9CF0056862E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B29AE2681D9CF0056862E /* ViewController.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		863E1F0326837321008F2F8C /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
 		DE0B29A72681D9CF0056862E /* Training.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Training.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE0B29AA2681D9CF0056862E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DE0B29AC2681D9CF0056862E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 			children = (
 				DE691112268326DF005BF23A /* NetworkManager.swift */,
 				DE69111726833BEA005BF23A /* NotificationNames.swift */,
+				863E1F0326837321008F2F8C /* UserDefaultManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 				DE691113268326DF005BF23A /* NetworkManager.swift in Sources */,
 				DE6911072682279B005BF23A /* NewBannerSupplementaryView.swift in Sources */,
 				DE69111826833BEA005BF23A /* NotificationNames.swift in Sources */,
+				863E1F0426837321008F2F8C /* UserDefaultManager.swift in Sources */,
 				DE0B29AD2681D9CF0056862E /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
