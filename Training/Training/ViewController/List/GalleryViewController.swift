@@ -179,8 +179,14 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
         let feedElement = self.feedElements[indexPath.row]
         delegate?.galleryViewControllerDidSelectElement(feedElement)
     }
+        
+//    // per ogni carattere modificato
+//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//
+//    }
     
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+    // tasto cerca
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         print("aaa")
     }
 
