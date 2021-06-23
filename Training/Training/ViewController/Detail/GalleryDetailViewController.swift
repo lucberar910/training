@@ -6,13 +6,14 @@
 //
 
 import UIKit
+import Kingfisher
 
 class GalleryDetailViewController: UIViewController, UIScrollViewDelegate {
 
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var imageView: UIImageView?
+    @IBOutlet weak var imageView: UIImageView!
     
-    var feedElement : Children?
+    var beer : Beer?
     
     var isFavorite: Bool = false {
         didSet {
@@ -37,11 +38,11 @@ class GalleryDetailViewController: UIViewController, UIScrollViewDelegate {
     
     @objc func pressBtn(sender: UIBarButtonItem) {
         if isFavorite {
-            UserDefaultManager.shared.removeFav(id: feedElement!.data.name)
+            UserDefaultManager.shared.removeFav(id: beer!.id)
             
             
         } else {
-            UserDefaultManager.shared.addFav(id: feedElement!.data.name)
+            UserDefaultManager.shared.addFav(id: beer!.id)
         }
         isFavorite.toggle()
     }
@@ -50,24 +51,35 @@ class GalleryDetailViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         
         self.scrollView.delegate = self
-//        self.scrollView.minimumZoomScale = 0.01
-//        self.scrollView.zoomScale = 0.25
-//        self.scrollView.maximumZoomScale = 2
+        self.scrollView.minimumZoomScale = 1
+        self.scrollView.zoomScale = 1
+        self.scrollView.maximumZoomScale = 2
         
-        isFavorite = UserDefaultManager.shared.isFav(id: feedElement!.data.name)
+        isFavorite = UserDefaultManager.shared.isFav(id: beer!.id)
         print("-----------\(isFavorite)")
         self.btn.target = self
         self.btn.action = #selector(pressBtn(sender:))
     
         self.navigationItem.rightBarButtonItem = btn
-        if let string = feedElement?.data.url {
+//        if let string = feedElement?.data.url {
+//            let url = URL(string: string)
+//            self.imageView!.kf.setImage(with: url, placeholder: UIImage(systemName: "pencil.and.outline"), options: [.imageModifier(ResizeModifier(maxWidth: <#T##CGFloat#>))])
+//            self.imageView!.kf.setImage(with: url, placeholder: UIImage(systemName: "pencil.and.outline"))
+//        } else {
+//            self.imageView!.image = nil
+//        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let string = beer?.imageUrl {
             let url = URL(string: string)
-            self.imageView!.kf.setImage(with: url, placeholder: UIImage(systemName: "pencil.and.outline"))
+            self.imageView!.kf.setImage(with: url, placeholder: UIImage(systemName: "photo.on.rectangle.angled"), options: [.imageModifier(ResizeModifier(maxHeight: imageView.bounds.height))])
         } else {
             self.imageView!.image = nil
         }
     }
-    
     
     
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
@@ -75,4 +87,32 @@ class GalleryDetailViewController: UIViewController, UIScrollViewDelegate {
     }
     
 
+}
+
+struct ResizeModifier: ImageModifier {
+    let maxHeight: CGFloat
+    
+    init(maxHeight: CGFloat) {
+        self.maxHeight = maxHeight
+    }
+    
+    func modify(_ image: KFCrossPlatformImage) -> KFCrossPlatformImage {
+        guard let resizedImage = image.resizeWithHeight(height: maxHeight) else { return image }
+        return resizedImage
+    }
+}
+
+extension UIImage {
+    
+    func resizeWithHeight(height: CGFloat) -> UIImage? {
+        let imageView = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: CGFloat(ceil(size.width * height/size.height)), height: height)))
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = self
+        UIGraphicsBeginImageContextWithOptions(imageView.bounds.size, false, scale)
+        guard let context = UIGraphicsGetCurrentContext() else { return nil }
+        imageView.layer.render(in: context)
+        guard let result = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
+        UIGraphicsEndImageContext()
+        return result
+    }
 }

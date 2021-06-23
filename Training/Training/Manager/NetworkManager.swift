@@ -12,22 +12,21 @@ import UIKit
 class NetworkManager {
     static let shared = NetworkManager()
     
-    func search(_ text : String, completion : @escaping (Result<Reddit,Error>) -> Void) {
-        var request : String = "https://www.reddit.com/r/key_search/top.json"
-        request = request.replacingOccurrences(of: "key_search", with: text)
+    func search(_ text : String, completion : @escaping (Result<[Beer],Error>) -> Void) {
+        let request : String = "https://api.punkapi.com/v2/beers?page=1&per_page=80&beer_name=\(text.replacingOccurrences(of: " ", with: "_"))"
         
         AF.request(request)
             .validate(statusCode: 200..<300)
             .response {
                 response in
                 guard let data = response.data, response.error == nil else {
-                    completion(Result.failure(response.error as! Error))
+                    completion(Result.failure(response.error!))
                     return
                 }
                 do {
-                    var response : Reddit?
+                    var response : [Beer]?
                     let decoder = JSONDecoder()
-                    response = try decoder.decode(Reddit.self, from: data)
+                    response = try decoder.decode([Beer].self, from: data)
                     completion(Result.success(response!))
 //                    completion(Result.failure(URLError(URLError.badServerResponse)))
                 } catch let error {
@@ -36,3 +35,4 @@ class NetworkManager {
             }
     }
 }
+
