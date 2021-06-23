@@ -193,6 +193,7 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
     // tasto cerca
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         NetworkManager.shared.search(searchField.text!) { [weak self] result in
+            // metodo completion richiamato dal network manager
             switch result {
                 case .success(let reddit):
                     var filtered = reddit.data.children.filter { child in
