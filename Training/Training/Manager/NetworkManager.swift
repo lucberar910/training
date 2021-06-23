@@ -11,11 +11,13 @@ import UIKit
 
 class NetworkManager {
     static let shared = NetworkManager()
+    var currentRequest: DataRequest?
     
     func search(_ text : String, completion : @escaping (Result<[Beer],Error>) -> Void) {
+        currentRequest?.cancel()
         let request : String = "https://api.punkapi.com/v2/beers?page=1&per_page=80&beer_name=\(text.replacingOccurrences(of: " ", with: "_"))"
         
-        AF.request(request)
+        currentRequest = AF.request(request)
             .validate(statusCode: 200..<300)
             .response {
                 response in

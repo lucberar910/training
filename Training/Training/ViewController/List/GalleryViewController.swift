@@ -187,12 +187,20 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
         if let item = self.items?[indexPath.row] {
             delegate?.galleryViewControllerDidSelectElement(item)
         }
-        
     }
     
     // tasto cerca
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        NetworkManager.shared.search(searchField.text!) { [weak self] result in
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        makeCall()
+    }
+    
+    // chiamata API
+    func makeCall() {
+        NetworkManager.shared.search(searchField.text ?? "") { [weak self] result in
             // metodo completion richiamato dal network manager
             switch result {
                 case .success(let beers):
@@ -206,13 +214,11 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
                     }
                     self?.items = beers
                     self?.galleryCollectionView.reloadData()
-                case .failure(let error):
+                case .failure(_):
                     self?.labelEmpty.isHidden = false
                     self?.labelEmpty.text = "Errore nella chiamata"
                     self?.galleryCollectionView.isHidden = true
             }
         }
     }
-    
-
 }
