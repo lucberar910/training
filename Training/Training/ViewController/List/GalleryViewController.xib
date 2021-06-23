@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GalleryViewController" customModule="Training" customModuleProvider="target">
             <connections>
                 <outlet property="galleryCollectionView" destination="ARR-cZ-zIx" id="nBQ-dL-0bO"/>
+                <outlet property="labelEmpty" destination="0OD-xp-HdG" id="2HV-Fo-NQP"/>
                 <outlet property="searchField" destination="BL4-Yz-2g0" id="G7B-fQ-VhL"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -34,14 +35,23 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0OD-xp-HdG">
+                    <rect key="frame" x="32" y="448" width="350" height="0.0"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="ARR-cZ-zIx" firstAttribute="top" secondItem="BL4-Yz-2g0" secondAttribute="bottom" id="7bj-qs-FAP"/>
+                <constraint firstItem="0OD-xp-HdG" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="CsH-ae-r8f"/>
+                <constraint firstItem="0OD-xp-HdG" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="32" id="KZ3-8n-AD0"/>
                 <constraint firstItem="ARR-cZ-zIx" firstAttribute="leading" secondItem="BL4-Yz-2g0" secondAttribute="leading" id="PMV-dN-0hx"/>
                 <constraint firstItem="BL4-Yz-2g0" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="QzA-eU-IUo"/>
                 <constraint firstItem="ARR-cZ-zIx" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="YSO-Lx-8A6"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="0OD-xp-HdG" secondAttribute="trailing" constant="32" id="bef-sK-Hhg"/>
                 <constraint firstItem="ARR-cZ-zIx" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ceh-9C-mfJ"/>
                 <constraint firstItem="ARR-cZ-zIx" firstAttribute="trailing" secondItem="BL4-Yz-2g0" secondAttribute="trailing" id="p5a-sG-sNY"/>
                 <constraint firstItem="BL4-Yz-2g0" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="25" id="vbl-gB-fDs"/>

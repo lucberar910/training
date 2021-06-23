@@ -147,9 +147,9 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
     @IBOutlet weak var galleryCollectionView: UICollectionView!
     @IBOutlet weak var searchField: UISearchBar!
     weak var delegate: GalleryViewControllerDelegate?
+    @IBOutlet weak var labelEmpty: UILabel!
     
-    
-    var reddit : Reddit?
+    var items : [Children]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -167,11 +167,11 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.reddit?.data.children.count ?? 0
+        return self.items?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let children = self.reddit?.data.children[indexPath.row]
+        let children = self.items?[indexPath.row]
         let c = galleryCollectionView.dequeueReusableCell(withReuseIdentifier: "GalleryItemCollectionViewCell", for: indexPath) as! GalleryItemCollectionViewCell
         if let string = children?.data.url{
             let url = URL(string: string)
@@ -184,7 +184,7 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let item = self.reddit?.data.children[indexPath.row] {
+        if let item = self.items?[indexPath.row] {
             delegate?.galleryViewControllerDidSelectElement(item)
         }
         
@@ -195,10 +195,23 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
         NetworkManager.shared.search(searchField.text!) { [weak self] result in
             switch result {
                 case .success(let reddit):
-                    self?.reddit = reddit
+                    var filtered = reddit.data.children.filter { child in
+                        return !child.data.url.isEmpty
+                    }
+                    if(reddit.data.children.count == 0){
+                        self?.labelEmpty.isHidden = false
+                        self?.labelEmpty.text = "Nessun risultato"
+                        self?.galleryCollectionView.isHidden = true
+                    } else {
+                        self?.labelEmpty.isHidden = true
+                        self?.galleryCollectionView.isHidden = false
+                    }
+                    self?.items = filtered
                     self?.galleryCollectionView.reloadData()
                 case .failure(let error):
-                    () // alert view
+                    self?.labelEmpty.isHidden = false
+                    self?.labelEmpty.text = "Errore nella chiamata"
+                    self?.galleryCollectionView.isHidden = true
             }
         }
     }
