@@ -7,18 +7,29 @@
 //
 
 import Foundation
+import Combine
 
 class GalleryViewModel: ViewModel {
     
-
-    
-    // MARK: - Object lifecycle
+    var searchUseCase : SearchUseCase
+    @Published var beers : [Beer] = []
     
     init() {
-    
+        self.searchUseCase = SearchUseCase()
     }
-
-    // MARK: - Internal methods
     
+    func search(text : String){
+        self.searchUseCase.execute(text: text) { result in
+            DispatchQueue.main.async {
+                // thread principale
+                switch result {
+                    case .success(let beers):
+                        self.beers = beers
+                    case .failure(let error):
+                        ()
+                }
+            }
+        }
+    }
 
 }

@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import Combine
 
 protocol GalleryViewControllerDelegate: class {
   func galleryViewControllerDidSelectElement(_ selectedElement: Beer)
@@ -60,8 +61,7 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
     @IBOutlet weak var searchField: UISearchBar!
     weak var delegate: GalleryViewControllerDelegate?
     @IBOutlet weak var labelEmpty: UILabel!
-    
-    var items : [Beer]?
+    var cancellables = Set<AnyCancellable>()
     
     init(viewModel: GalleryViewModel, delegate: GalleryViewControllerDelegate ) {
         self.viewModel = viewModel
@@ -86,30 +86,39 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
         self.galleryCollectionView.collectionViewLayout = compositionalLayout
 //        self.galleryCollectionView.collectionViewLayout = CVLayout(nCols: 2, cellHeight: 200, interItemSpace: 10, lineSpace: 10)
         self.galleryCollectionView.register(UINib(nibName: "GalleryItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "GalleryItemCollectionViewCell")
+        bindViewModel() // subscriber
+    }
+    
+    func bindViewModel(){
+        viewModel.$beers.sink { [weak self] beers in
+            if(beers.count == 0){
+                self?.labelEmpty.isHidden = false
+                self?.labelEmpty.text = "Nessun risultato"
+                self?.galleryCollectionView.isHidden = true
+            } else {
+                self?.labelEmpty.isHidden = true
+                self?.galleryCollectionView.isHidden = false
+            }
+            self?.galleryCollectionView.reloadData()
+        }
+        .store(in: &cancellables)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.items?.count ?? 0
+        return viewModel.beers.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let item = self.items?[indexPath.row]
+        let item = viewModel.beers[indexPath.row]
         let c = galleryCollectionView.dequeueReusableCell(withReuseIdentifier: "GalleryItemCollectionViewCell", for: indexPath) as! GalleryItemCollectionViewCell
-        if let string = item?.imageUrl {
-            let url = URL(string: string)
-            c.imageView.kf.setImage(with: url, placeholder: UIImage(systemName: "photo.on.rectangle.angled"))
-        } else {
-            c.imageView.image = nil
-        }
-        
+
+        c.imageUrl = item.imageUrl
         return c
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let item = self.items?[indexPath.row] {
-            delegate?.galleryViewControllerDidSelectElement(item)
-        }
-        
+        let item = viewModel.beers[indexPath.row]
+        delegate?.galleryViewControllerDidSelectElement(item)
     }
     
     // tasto cerca
@@ -118,26 +127,28 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        NetworkManager.shared.search(searchField.text!) { [weak self] result in
-            // metodo completion richiamato dal network manager
-            switch result {
-                case .success(let beers):
-                    if(beers.count == 0){
-                        self?.labelEmpty.isHidden = false
-                        self?.labelEmpty.text = "Nessun risultato"
-                        self?.galleryCollectionView.isHidden = true
-                    } else {
-                        self?.labelEmpty.isHidden = true
-                        self?.galleryCollectionView.isHidden = false
-                    }
-                    self?.items = beers
-                    self?.galleryCollectionView.reloadData()
-                case .failure(let error):
-                    self?.labelEmpty.isHidden = false
-                    self?.labelEmpty.text = "Errore nella chiamata"
-                    self?.galleryCollectionView.isHidden = true
-            }
-        }
+        viewModel.search(text: searchText)
+        
+//        NetworkManager.shared.search(searchField.text!) { [weak self] result in
+//            // metodo completion richiamato dal network manager
+//            switch result {
+//                case .success(let beers):
+//                    if(beers.count == 0){
+//                        self?.labelEmpty.isHidden = false
+//                        self?.labelEmpty.text = "Nessun risultato"
+//                        self?.galleryCollectionView.isHidden = true
+//                    } else {
+//                        self?.labelEmpty.isHidden = true
+//                        self?.galleryCollectionView.isHidden = false
+//                    }
+//                    self?.items = beers
+//                    self?.galleryCollectionView.reloadData()
+//                case .failure(let error):
+//                    self?.labelEmpty.isHidden = false
+//                    self?.labelEmpty.text = "Errore nella chiamata"
+//                    self?.galleryCollectionView.isHidden = true
+//            }
+//        }
     }
     
 
