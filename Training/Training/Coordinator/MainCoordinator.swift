@@ -12,9 +12,9 @@ class MainCoordinator : Coordinator {
     var navController : UINavigationController = UINavigationController()
     
     func start() {
-        let galleryViewController = GalleryViewController()
+        let galleyViewModel = GalleryViewModel()
+        let galleryViewController = GalleryViewController(viewModel: galleyViewModel, delegate: self)
         navController.pushViewController(galleryViewController, animated: false)
-        galleryViewController.delegate = self
     }
 }
 
