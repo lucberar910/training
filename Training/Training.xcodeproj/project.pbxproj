@@ -81,6 +81,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		86D2A8D02684B10900055C3E /* Architecture */ = {
+			isa = PBXGroup;
+			children = (
+				DE6910F1268206D8005BF23A /* Model */,
+				DE691111268326CF005BF23A /* Manager */,
+			);
+			path = Architecture;
+			sourceTree = "<group>";
+		};
 		DE0B299E2681D9CF0056862E = {
 			isa = PBXGroup;
 			children = (
@@ -100,9 +109,8 @@
 		DE0B29A92681D9CF0056862E /* Training */ = {
 			isa = PBXGroup;
 			children = (
-				DE691111268326CF005BF23A /* Manager */,
-				DE6910F1268206D8005BF23A /* Model */,
-				DE6910EC2681F5D2005BF23A /* ViewController */,
+				86D2A8D02684B10900055C3E /* Architecture */,
+				DE6910EC2681F5D2005BF23A /* Interfaces */,
 				DE6910E72681F3DA005BF23A /* Coordinator */,
 				DE0B29AA2681D9CF0056862E /* AppDelegate.swift */,
 				DE0B29AC2681D9CF0056862E /* SceneDelegate.swift */,
@@ -123,14 +131,14 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
-		DE6910EC2681F5D2005BF23A /* ViewController */ = {
+		DE6910EC2681F5D2005BF23A /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
 				DE69110426822712005BF23A /* CompositionLayout */,
 				DE6910FD268212BC005BF23A /* Detail */,
 				DE6910FC268212AC005BF23A /* List */,
 			);
-			path = ViewController;
+			path = Interfaces;
 			sourceTree = "<group>";
 		};
 		DE6910F1268206D8005BF23A /* Model */ = {
