@@ -20,20 +20,33 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" minimumZoomScale="0.5" maximumZoomScale="2" translatesAutoresizingMaskIntoConstraints="NO" id="SDD-sK-81P">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.5" maximumZoomScale="2" translatesAutoresizingMaskIntoConstraints="NO" id="SDD-sK-81P">
                     <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="318" translatesAutoresizingMaskIntoConstraints="NO" id="ho4-SQ-Q23">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="318"/>
-                        </imageView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MHa-ac-CuA">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="318" translatesAutoresizingMaskIntoConstraints="NO" id="ho4-SQ-Q23">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="ho4-SQ-Q23" firstAttribute="centerY" secondItem="MHa-ac-CuA" secondAttribute="centerY" id="33p-1I-rda"/>
+                                <constraint firstItem="ho4-SQ-Q23" firstAttribute="leading" secondItem="MHa-ac-CuA" secondAttribute="leading" id="QQo-ZM-Fl5"/>
+                                <constraint firstAttribute="bottom" relation="lessThanOrEqual" secondItem="ho4-SQ-Q23" secondAttribute="bottom" id="WHD-QR-CSq"/>
+                                <constraint firstItem="ho4-SQ-Q23" firstAttribute="top" relation="greaterThanOrEqual" secondItem="MHa-ac-CuA" secondAttribute="top" id="cA5-Lx-Bvg"/>
+                                <constraint firstAttribute="trailing" secondItem="ho4-SQ-Q23" secondAttribute="trailing" id="jDt-Xe-nAW"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="ho4-SQ-Q23" firstAttribute="leading" secondItem="b5F-aJ-Czf" secondAttribute="leading" id="1r9-fl-j1v"/>
-                        <constraint firstItem="ho4-SQ-Q23" firstAttribute="top" secondItem="b5F-aJ-Czf" secondAttribute="top" id="4nJ-F9-2NV"/>
-                        <constraint firstItem="ho4-SQ-Q23" firstAttribute="bottom" secondItem="b5F-aJ-Czf" secondAttribute="bottom" constant="318" id="Ih9-W0-Euj"/>
-                        <constraint firstItem="ho4-SQ-Q23" firstAttribute="width" relation="greaterThanOrEqual" secondItem="0hf-MN-ntn" secondAttribute="width" id="L00-W9-AWy"/>
-                        <constraint firstItem="ho4-SQ-Q23" firstAttribute="trailing" secondItem="b5F-aJ-Czf" secondAttribute="trailing" constant="414" id="YsQ-XZ-phY"/>
+                        <constraint firstItem="MHa-ac-CuA" firstAttribute="leading" secondItem="b5F-aJ-Czf" secondAttribute="leading" id="2iA-AO-DMW"/>
+                        <constraint firstItem="MHa-ac-CuA" firstAttribute="width" relation="greaterThanOrEqual" secondItem="0hf-MN-ntn" secondAttribute="width" id="6zR-YM-vcy"/>
+                        <constraint firstItem="MHa-ac-CuA" firstAttribute="bottom" secondItem="b5F-aJ-Czf" secondAttribute="bottom" constant="318" id="BWJ-Lp-02j"/>
+                        <constraint firstItem="MHa-ac-CuA" firstAttribute="top" secondItem="b5F-aJ-Czf" secondAttribute="top" id="QJw-uU-HTb"/>
+                        <constraint firstItem="MHa-ac-CuA" firstAttribute="height" relation="greaterThanOrEqual" secondItem="0hf-MN-ntn" secondAttribute="height" id="cLG-1U-tLi"/>
+                        <constraint firstItem="MHa-ac-CuA" firstAttribute="trailing" secondItem="b5F-aJ-Czf" secondAttribute="trailing" constant="414" id="eXr-a3-JH8"/>
                     </constraints>
                     <viewLayoutGuide key="contentLayoutGuide" id="b5F-aJ-Czf"/>
                     <viewLayoutGuide key="frameLayoutGuide" id="0hf-MN-ntn"/>
@@ -41,6 +54,12 @@
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="SDD-sK-81P" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="48v-bz-hZL"/>
+                <constraint firstItem="SDD-sK-81P" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Lnb-UT-pjS"/>
+                <constraint firstItem="SDD-sK-81P" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="duG-7X-aLN"/>
+                <constraint firstItem="SDD-sK-81P" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="qpx-s0-0Yo"/>
+            </constraints>
             <point key="canvasLocation" x="137.68115942028987" y="87.723214285714278"/>
         </view>
     </objects>

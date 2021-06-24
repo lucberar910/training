@@ -9,7 +9,7 @@ import UIKit
 import Kingfisher
 
 protocol GalleryViewControllerDelegate: class {
-  func galleryViewControllerDidSelectElement(_ selectedElement: Children)
+  func galleryViewControllerDidSelectElement(_ selectedElement: Beer)
 }
 
 class GalleryViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource,
@@ -149,7 +149,7 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
     weak var delegate: GalleryViewControllerDelegate?
     @IBOutlet weak var labelEmpty: UILabel!
     
-    var items : [Children]?
+    var items : [Beer]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -171,11 +171,11 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let children = self.items?[indexPath.row]
+        let item = self.items?[indexPath.row]
         let c = galleryCollectionView.dequeueReusableCell(withReuseIdentifier: "GalleryItemCollectionViewCell", for: indexPath) as! GalleryItemCollectionViewCell
-        if let string = children?.data.url{
+        if let string = item?.imageUrl {
             let url = URL(string: string)
-            c.imageView.kf.setImage(with: url, placeholder: UIImage(systemName: "pencil.and.outline"))
+            c.imageView.kf.setImage(with: url, placeholder: UIImage(systemName: "photo.on.rectangle.angled"))
         } else {
             c.imageView.image = nil
         }
@@ -195,11 +195,8 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
         NetworkManager.shared.search(searchField.text!) { [weak self] result in
             // metodo completion richiamato dal network manager
             switch result {
-                case .success(let reddit):
-                    var filtered = reddit.data.children.filter { child in
-                        return !child.data.url.isEmpty
-                    }
-                    if(reddit.data.children.count == 0){
+                case .success(let beers):
+                    if(beers.count == 0){
                         self?.labelEmpty.isHidden = false
                         self?.labelEmpty.text = "Nessun risultato"
                         self?.galleryCollectionView.isHidden = true
@@ -207,7 +204,7 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
                         self?.labelEmpty.isHidden = true
                         self?.galleryCollectionView.isHidden = false
                     }
-                    self?.items = filtered
+                    self?.items = beers
                     self?.galleryCollectionView.reloadData()
                 case .failure(let error):
                     self?.labelEmpty.isHidden = false
