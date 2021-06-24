@@ -6,10 +6,24 @@
 //
 
 import UIKit
+import Kingfisher
 
 class GalleryItemCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var imageView: UIImageView!
+    private var downloadTask : DownloadTask?
+    var imageUrl : String? {
+        didSet {
+            downloadTask?.cancel()
+            downloadTask = nil
+            if let string = imageUrl {
+                let url = URL(string: string)
+                downloadTask = imageView.kf.setImage(with: url, placeholder: UIImage(systemName: "photo.on.rectangle.angled"))
+            } else {
+                imageView.image = nil
+            }
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

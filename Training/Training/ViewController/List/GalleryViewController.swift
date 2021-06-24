@@ -192,6 +192,10 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     // tasto cerca
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder() // chiude la testiera
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         NetworkManager.shared.search(searchField.text!) { [weak self] result in
             // metodo completion richiamato dal network manager
             switch result {
