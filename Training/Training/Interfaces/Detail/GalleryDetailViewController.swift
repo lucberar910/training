@@ -7,27 +7,27 @@
 
 import UIKit
 import Kingfisher
+import Combine
 
-class GalleryDetailViewController: UIViewController, UIScrollViewDelegate {
-
+class GalleryDetailViewController: UIViewController, UIScrollViewDelegate, ViewModellable {
+    typealias ViewModelType = GalleryDetailViewModel
+    var viewModel: GalleryDetailViewModel
+    
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imageView: UIImageView!
+    var cancellables = Set<AnyCancellable>()
     
-    var beer : Beer?
-    
-    var isFavorite: Bool = false {
-        didSet {
-            if isFavorite {
-                btn.image = UIImage(systemName: "star.fill")
-            } else {
-                btn.image = UIImage(systemName: "star")
-            }
-        }
-    }
-    
-    
-    
-    
+//
+//    var beer : Beer?
+//    var isFavorite: Bool = false {
+//        didSet {
+//            if isFavorite {
+//                btn.image = UIImage(systemName: "star.fill")
+//            } else {
+//                btn.image = UIImage(systemName: "star")
+//            }
+//        }
+//    }
     
     var btn = UIBarButtonItem(
         image: UIImage(systemName: "star"),
@@ -36,15 +36,18 @@ class GalleryDetailViewController: UIViewController, UIScrollViewDelegate {
         action: nil)
     
     
+    init(viewModel : GalleryDetailViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
     @objc func pressBtn(sender: UIBarButtonItem) {
-        if isFavorite {
-            UserDefaultManager.shared.removeFav(id: beer!.id)
-            
-            
-        } else {
-            UserDefaultManager.shared.addFav(id: beer!.id)
-        }
-        isFavorite.toggle()
+        viewModel.toggleFav()
     }
     
     override func viewDidLoad() {
@@ -55,25 +58,26 @@ class GalleryDetailViewController: UIViewController, UIScrollViewDelegate {
         self.scrollView.zoomScale = 1
         self.scrollView.maximumZoomScale = 2
         
-        isFavorite = UserDefaultManager.shared.isFav(id: beer!.id)
-        print("-----------\(isFavorite)")
         self.btn.target = self
         self.btn.action = #selector(pressBtn(sender:))
-    
         self.navigationItem.rightBarButtonItem = btn
-//        if let string = feedElement?.data.url {
-//            let url = URL(string: string)
-//            self.imageView!.kf.setImage(with: url, placeholder: UIImage(systemName: "pencil.and.outline"), options: [.imageModifier(ResizeModifier(maxWidth: <#T##CGFloat#>))])
-//            self.imageView!.kf.setImage(with: url, placeholder: UIImage(systemName: "pencil.and.outline"))
-//        } else {
-//            self.imageView!.image = nil
-//        }
+        bindViewModel()
+    }
+    
+    func bindViewModel(){
+        viewModel.$isFav.sink { [weak self] value in
+            if value {
+                self?.btn.image = UIImage(systemName: "star.fill")
+            } else {
+                self?.btn.image = UIImage(systemName: "star")
+            }
+        }.store(in: &cancellables)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if let string = beer?.imageUrl {
+        if let string = viewModel.imageUrl {
             let url = URL(string: string)
             self.imageView!.kf.setImage(with: url, placeholder: UIImage(systemName: "photo.on.rectangle.angled"), options: [.imageModifier(ResizeModifier(maxHeight: imageView.bounds.height))])
         } else {
@@ -81,11 +85,9 @@ class GalleryDetailViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
-    
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return imageView
     }
-    
 
 }
 

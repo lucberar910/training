@@ -10,17 +10,13 @@ import Kingfisher
 import Combine
 
 protocol GalleryViewControllerDelegate: class {
-  func galleryViewControllerDidSelectElement(_ selectedElement: Beer)
+    func galleryViewControllerDidSelectElement(_ selectedElement: Beer)
 }
 
 class GalleryViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource,
                              UISearchBarDelegate, ViewModellable {
     
-    
-    
     typealias ViewModelType = GalleryViewModel
-    
-
     var viewModel: GalleryViewModel
     
     
@@ -41,11 +37,11 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
         
         let nestedGroupSize2 = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.5))
         let nestedGroup2 = NSCollectionLayoutGroup.horizontal(layoutSize: nestedGroupSize2, subitems: [smallItem2])
-
+        
         // Outer Group
         let outerGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(0.5))
         let outerGroup = NSCollectionLayoutGroup.vertical(layoutSize: outerGroupSize, subitems: [nestedGroup1, nestedGroup2])
-
+        
         // Section
         let section = NSCollectionLayoutSection(group: outerGroup)
         section.contentInsets = NSDirectionalEdgeInsets(top: inset, leading: inset, bottom: inset, trailing: inset)
@@ -84,7 +80,7 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
         self.galleryCollectionView.register(UINib(nibName: "NewBannerSupplementaryView", bundle: nil), forSupplementaryViewOfKind: "new-banner", withReuseIdentifier: "NewBannerSupplementaryView")
         
         self.galleryCollectionView.collectionViewLayout = compositionalLayout
-//        self.galleryCollectionView.collectionViewLayout = CVLayout(nCols: 2, cellHeight: 200, interItemSpace: 10, lineSpace: 10)
+        //        self.galleryCollectionView.collectionViewLayout = CVLayout(nCols: 2, cellHeight: 200, interItemSpace: 10, lineSpace: 10)
         self.galleryCollectionView.register(UINib(nibName: "GalleryItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "GalleryItemCollectionViewCell")
         bindViewModel() // subscriber
     }
@@ -111,7 +107,7 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let item = viewModel.beers[indexPath.row]
         let c = galleryCollectionView.dequeueReusableCell(withReuseIdentifier: "GalleryItemCollectionViewCell", for: indexPath) as! GalleryItemCollectionViewCell
-
+        
         c.imageUrl = item.imageUrl
         return c
     }
@@ -129,27 +125,27 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         viewModel.search(text: searchText)
         
-//        NetworkManager.shared.search(searchField.text!) { [weak self] result in
-//            // metodo completion richiamato dal network manager
-//            switch result {
-//                case .success(let beers):
-//                    if(beers.count == 0){
-//                        self?.labelEmpty.isHidden = false
-//                        self?.labelEmpty.text = "Nessun risultato"
-//                        self?.galleryCollectionView.isHidden = true
-//                    } else {
-//                        self?.labelEmpty.isHidden = true
-//                        self?.galleryCollectionView.isHidden = false
-//                    }
-//                    self?.items = beers
-//                    self?.galleryCollectionView.reloadData()
-//                case .failure(let error):
-//                    self?.labelEmpty.isHidden = false
-//                    self?.labelEmpty.text = "Errore nella chiamata"
-//                    self?.galleryCollectionView.isHidden = true
-//            }
-//        }
+        //        NetworkManager.shared.search(searchField.text!) { [weak self] result in
+        //            // metodo completion richiamato dal network manager
+        //            switch result {
+        //                case .success(let beers):
+        //                    if(beers.count == 0){
+        //                        self?.labelEmpty.isHidden = false
+        //                        self?.labelEmpty.text = "Nessun risultato"
+        //                        self?.galleryCollectionView.isHidden = true
+        //                    } else {
+        //                        self?.labelEmpty.isHidden = true
+        //                        self?.galleryCollectionView.isHidden = false
+        //                    }
+        //                    self?.items = beers
+        //                    self?.galleryCollectionView.reloadData()
+        //                case .failure(let error):
+        //                    self?.labelEmpty.isHidden = false
+        //                    self?.labelEmpty.text = "Errore nella chiamata"
+        //                    self?.galleryCollectionView.isHidden = true
+        //            }
+        //        }
     }
     
-
+    
 }

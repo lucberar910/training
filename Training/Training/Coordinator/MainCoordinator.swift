@@ -20,8 +20,9 @@ class MainCoordinator : Coordinator {
 
 extension MainCoordinator: GalleryViewControllerDelegate {
     func galleryViewControllerDidSelectElement(_ selectedElement: Beer) {
-        let galleryDetailViewController = GalleryDetailViewController()
-        galleryDetailViewController.beer = selectedElement
+        let galleryDetailViewModel = GalleryDetailViewModel(beer: selectedElement)
+        let galleryDetailViewController = GalleryDetailViewController(viewModel: galleryDetailViewModel)
+        //galleryDetailViewController.beer = selectedElement
         navController.pushViewController(galleryDetailViewController, animated: true)
     }
     
