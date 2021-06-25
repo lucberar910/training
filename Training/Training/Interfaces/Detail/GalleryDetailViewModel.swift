@@ -11,19 +11,20 @@ import Combine
 
 class GalleryDetailViewModel: ViewModel {
     
-    var addFavUseCase : AddFavoriteUseCase
-    var removeFavUseCase : RemoveFavoriteUseCase
-    var isFavUseCase : IsFavoriteUseCase
+    var addFavUseCase : AddFavoriteUseCaseProtocol
+    var removeFavUseCase : RemoveFavoriteUseCaseProtocol
+    var isFavUseCase : IsFavoriteUseCaseProtocol
+    
     @Published var isFav : Bool
     private let beer : Beer
     var imageUrl : String? {
         beer.imageUrl
     }
     
-    init(beer : Beer) {
-        self.addFavUseCase = AddFavoriteUseCase()
-        self.removeFavUseCase = RemoveFavoriteUseCase()
-        self.isFavUseCase = IsFavoriteUseCase()
+    init(container : MainContainerProtocol, beer : Beer) {
+        self.addFavUseCase = container.addFavUseCase // AddFavoriteUseCase()
+        self.removeFavUseCase = container.removeFavUseCase // RemoveFavoriteUseCase()
+        self.isFavUseCase = container.isFavUseCase // IsFavoriteUseCase()
         self.beer = beer
         self.isFav = self.isFavUseCase.execute(id: beer.id)
     }
