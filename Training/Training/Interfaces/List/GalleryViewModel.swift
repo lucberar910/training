@@ -11,11 +11,11 @@ import Combine
 
 class GalleryViewModel: ViewModel {
     
-    var searchUseCase : SearchUseCase
+    var searchUseCase : SearchUseCaseProtocol
     @Published var beers : [Beer] = []
     
-    init() {
-        self.searchUseCase = SearchUseCase()
+    init(container : MainContainerProtocol) {
+        self.searchUseCase = container.searchUseCase
     }
     
     func search(text : String){

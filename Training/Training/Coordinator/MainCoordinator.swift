@@ -10,9 +10,10 @@ import UIKit
 
 class MainCoordinator : Coordinator {
     var navController : UINavigationController = UINavigationController()
+    var container = MainContainer()
     
     func start() {
-        let galleyViewModel = GalleryViewModel()
+        let galleyViewModel = GalleryViewModel(container: container)
         let galleryViewController = GalleryViewController(viewModel: galleyViewModel, delegate: self)
         navController.pushViewController(galleryViewController, animated: false)
     }
@@ -20,7 +21,7 @@ class MainCoordinator : Coordinator {
 
 extension MainCoordinator: GalleryViewControllerDelegate {
     func galleryViewControllerDidSelectElement(_ selectedElement: Beer) {
-        let galleryDetailViewModel = GalleryDetailViewModel(beer: selectedElement)
+        let galleryDetailViewModel = GalleryDetailViewModel(container: container, beer: selectedElement)
         let galleryDetailViewController = GalleryDetailViewController(viewModel: galleryDetailViewModel)
         //galleryDetailViewController.beer = selectedElement
         navController.pushViewController(galleryDetailViewController, animated: true)

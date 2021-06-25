@@ -14,7 +14,11 @@ protocol SearchUseCaseProtocol {
 }
 
 class SearchUseCase: SearchUseCaseProtocol {
-    let repository = BeerRepository()
+    let repository : BeerRepositoryProtocol
+    
+    init(container : MainContainerProtocol) {
+        self.repository = container.beersRepository
+    }
     
     func execute(text: String, completion: @escaping (Result<[Beer], Error>) -> Void) {
         self.repository.search(text, completion: completion)

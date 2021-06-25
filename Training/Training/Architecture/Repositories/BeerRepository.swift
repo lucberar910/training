@@ -17,12 +17,12 @@ protocol BeerRepositoryProtocol {
 }
 
 public class BeerRepository{
-    var network : NetworkManager
-    var userDefault : UserDefaultManager
+    var network : NetworkManagerProtocol
+    var userDefault : UserDefaultManagerProtocol
     
-    required public init() {
-        self.network = NetworkManager()
-        self.userDefault = UserDefaultManager()
+    init(container : MainContainerProtocol) {
+        self.network = container.networkManager
+        self.userDefault = container.userDefaultsManager
     }
 }
 

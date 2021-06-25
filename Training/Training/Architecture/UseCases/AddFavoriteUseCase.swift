@@ -14,7 +14,11 @@ protocol AddFavoriteUseCaseProtocol {
 }
 
 class AddFavoriteUseCase: AddFavoriteUseCaseProtocol {
-    let repository = BeerRepository()
+    let repository : BeerRepositoryProtocol
+    
+    init(container : MainContainerProtocol) {
+        self.repository = container.beersRepository
+    }
         
     func execute(id: Int) {
         self.repository.addFav(id: id)

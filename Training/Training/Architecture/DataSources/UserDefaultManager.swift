@@ -8,9 +8,15 @@
 import Foundation
 import UIKit
 
-class UserDefaultManager {
+protocol UserDefaultManagerProtocol {
+    func addFav(id: Int)
+    func removeFav(id: Int)
+    func isFav(id: Int) -> Bool
+}
+
+class UserDefaultManager : UserDefaultManagerProtocol {
     
-    static let shared = UserDefaultManager()
+   // static let shared = UserDefaultManager()
 
     func addFav(id: Int){
         var ids = UserDefaults.standard.object(forKey: "beers") as? [Int] ?? [Int]()

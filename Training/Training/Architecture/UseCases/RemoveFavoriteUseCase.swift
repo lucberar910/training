@@ -14,7 +14,11 @@ protocol RemoveFavoriteUseCaseProtocol {
 }
 
 class RemoveFavoriteUseCase: RemoveFavoriteUseCaseProtocol {
-    let repository = BeerRepository()
+    let repository : BeerRepositoryProtocol
+    
+    init(container : MainContainerProtocol) {
+        self.repository = container.beersRepository
+    }
         
     func execute(id: Int) {
         self.repository.removeFav(id: id)

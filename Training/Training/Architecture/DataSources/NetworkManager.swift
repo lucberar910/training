@@ -9,8 +9,12 @@ import Foundation
 import Alamofire
 import UIKit
 
-class NetworkManager {
-    static let shared = NetworkManager()
+protocol NetworkManagerProtocol {
+    func search(_ text : String, completion : @escaping (Result<[Beer],Error>) -> Void)
+}
+
+class NetworkManager : NetworkManagerProtocol {
+   // static let shared = NetworkManager()
     var currentRequest : DataRequest?
     
     func search(_ text : String, completion : @escaping (Result<[Beer],Error>) -> Void) {
