@@ -10,7 +10,7 @@ import Foundation
 import Combine
 
 class GalleryItemViewModel: ViewModel {
-    private let beer : Beer
+    let beer : Beer
     var imageUrl : String? {
         beer.imageUrl
     }

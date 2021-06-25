@@ -12,7 +12,7 @@ import Combine
 class GalleryViewModel: ViewModel {
     
     var searchUseCase : SearchUseCaseProtocol
-    @Published var beers : [Beer] = []
+    @Published var itemViewModels : [GalleryItemViewModel] = []
     
     init(container : MainContainerProtocol) {
         self.searchUseCase = container.searchUseCase
@@ -24,7 +24,8 @@ class GalleryViewModel: ViewModel {
                 // thread principale
                 switch result {
                     case .success(let beers):
-                        self.beers = beers
+                        self.itemViewModels = beers.map {return GalleryItemViewModel(beer: $0)}
+                        
                     case .failure(let error):
                         ()
                 }

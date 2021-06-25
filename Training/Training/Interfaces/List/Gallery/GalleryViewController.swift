@@ -17,6 +17,7 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
                              UISearchBarDelegate, ViewModellable {
     
     typealias ViewModelType = GalleryViewModel
+    
     var viewModel: GalleryViewModel
     
     
@@ -86,8 +87,8 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     func bindViewModel(){
-        viewModel.$beers.sink { [weak self] beers in
-            if(beers.count == 0){
+        viewModel.$itemViewModels.sink { [weak self] items in
+            if(items.count == 0){
                 self?.labelEmpty.isHidden = false
                 self?.labelEmpty.text = "Nessun risultato"
                 self?.galleryCollectionView.isHidden = true
@@ -101,22 +102,23 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.beers.count
+        return viewModel.itemViewModels.count
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let item = viewModel.beers[indexPath.row]
+        let item = viewModel.itemViewModels[indexPath.row]
         let c = galleryCollectionView.dequeueReusableCell(withReuseIdentifier: "GalleryItemCollectionViewCell", for: indexPath) as! GalleryItemCollectionViewCell
         
 //        let galleryItemViewModel = GalleryItemViewModel(beer: item)
-        c.viewModel = .init(beer: item) // galleryItemViewModel
+        c.viewModel = item //.init(beer: item) // galleryItemViewModel
 //        c.imageUrl = item.imageUrl
         return c
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let item = viewModel.beers[indexPath.row]
-        delegate?.galleryViewControllerDidSelectElement(item)
+        let item = viewModel.itemViewModels[indexPath.row]
+        delegate?.galleryViewControllerDidSelectElement(item.beer)
     }
     
     // tasto cerca
