@@ -10,7 +10,7 @@ import Foundation
 import Combine
 
 protocol SearchUseCaseProtocol {
-    func execute(text: String, completion: @escaping (Result<[Beer], Error>) -> Void)
+    func execute(text: String) -> AnyPublisher<[Beer],Error>
 }
 
 class SearchUseCase: SearchUseCaseProtocol {
@@ -20,7 +20,7 @@ class SearchUseCase: SearchUseCaseProtocol {
         self.repository = container.beersRepository
     }
     
-    func execute(text: String, completion: @escaping (Result<[Beer], Error>) -> Void) {
-        self.repository.search(text, completion: completion)
+    func execute(text: String) -> AnyPublisher<[Beer],Error> {
+        self.repository.search(text)
     }
 }

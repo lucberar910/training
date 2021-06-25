@@ -10,7 +10,7 @@ import Foundation
 import Combine
 
 protocol BeerRepositoryProtocol {
-    func search(_ text : String, completion : @escaping (Result<[Beer],Error>) -> Void)
+    func search(_ text: String) -> AnyPublisher<[Beer],Error>
     func addFav(id: Int)
     func removeFav(id: Int)
     func isFav(id: Int) -> Bool
@@ -40,7 +40,7 @@ extension BeerRepository: BeerRepositoryProtocol {
        return self.userDefault.isFav(id: id)
     }
     
-    func search(_ text: String, completion: @escaping (Result<[Beer], Error>) -> Void) {
-        self.network.search(text, completion: completion)
+    func search(_ text: String) -> AnyPublisher<[Beer],Error>{
+       return self.network.search(text)
     }
 }
