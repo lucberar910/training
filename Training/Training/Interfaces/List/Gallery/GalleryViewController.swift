@@ -74,15 +74,15 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
         self.galleryCollectionView.dataSource = self
         self.galleryCollectionView.delegate = self
         self.searchField.delegate = self
-        //self.feedElements = MockupData.getData() // mockup data
-        
         // supplementary item (banner sopra gli item)
         self.galleryCollectionView.register(UINib(nibName: "NewBannerSupplementaryView", bundle: nil), forSupplementaryViewOfKind: "new-banner", withReuseIdentifier: "NewBannerSupplementaryView")
-        
+            
+        // cell
         self.galleryCollectionView.collectionViewLayout = compositionalLayout
-        //        self.galleryCollectionView.collectionViewLayout = CVLayout(nCols: 2, cellHeight: 200, interItemSpace: 10, lineSpace: 10)
         self.galleryCollectionView.register(UINib(nibName: "GalleryItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "GalleryItemCollectionViewCell")
-        bindViewModel() // subscriber
+
+        // subscriber
+        bindViewModel()
     }
     
     func bindViewModel(){

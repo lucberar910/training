@@ -10,6 +10,9 @@ import Kingfisher
 
 class GalleryItemCollectionViewCell: UICollectionViewCell {
 
+    typealias ViewModelType = GalleryItemViewModel
+    var viewModel : GalleryItemViewModel?
+    
     @IBOutlet weak var imageView: UIImageView!
     private var downloadTask : DownloadTask?
     var imageUrl : String? {
@@ -24,6 +27,15 @@ class GalleryItemCollectionViewCell: UICollectionViewCell {
             }
         }
     }
+    
+//    init(viewModel : GalleryItemViewModel) {
+//        self.viewModel = viewModel
+//        //super.init(nibName: nil, bundle: nil)
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -26,6 +26,7 @@
 		DE1F6E1D2684CD4D001518E4 /* GalleryDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1F6E1C2684CD4D001518E4 /* GalleryDetailViewModel.swift */; };
 		DE1F6E232685D4CC001518E4 /* MainContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1F6E222685D4CC001518E4 /* MainContainer.swift */; };
 		DE1F6E242685D506001518E4 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1F6E212685D493001518E4 /* Container.swift */; };
+		DE1F6E2C2685E526001518E4 /* GalleryItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1F6E2B2685E526001518E4 /* GalleryItemViewModel.swift */; };
 		DE6910E92681F3EE005BF23A /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6910E82681F3EE005BF23A /* Coordinator.swift */; };
 		DE6910EB2681F41F005BF23A /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6910EA2681F41F005BF23A /* MainCoordinator.swift */; };
 		DE6910EF2681F643005BF23A /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6910ED2681F643005BF23A /* GalleryViewController.swift */; };
@@ -69,6 +70,7 @@
 		DE1F6E1C2684CD4D001518E4 /* GalleryDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryDetailViewModel.swift; sourceTree = "<group>"; };
 		DE1F6E212685D493001518E4 /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
 		DE1F6E222685D4CC001518E4 /* MainContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContainer.swift; sourceTree = "<group>"; };
+		DE1F6E2B2685E526001518E4 /* GalleryItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryItemViewModel.swift; sourceTree = "<group>"; };
 		DE6910E82681F3EE005BF23A /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		DE6910EA2681F41F005BF23A /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		DE6910ED2681F643005BF23A /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
@@ -187,6 +189,27 @@
 			path = Container;
 			sourceTree = "<group>";
 		};
+		DE1F6E292685E4C8001518E4 /* Item */ = {
+			isa = PBXGroup;
+			children = (
+				DE6910F626820BED005BF23A /* GalleryItemCollectionViewCell.swift */,
+				DE6910F726820BED005BF23A /* GalleryItemCollectionViewCell.xib */,
+				DE1F6E2B2685E526001518E4 /* GalleryItemViewModel.swift */,
+			);
+			path = Item;
+			sourceTree = "<group>";
+		};
+		DE1F6E2A2685E4CE001518E4 /* Gallery */ = {
+			isa = PBXGroup;
+			children = (
+				DE6910ED2681F643005BF23A /* GalleryViewController.swift */,
+				DE6910EE2681F643005BF23A /* GalleryViewController.xib */,
+				86D2A8D82684B43900055C3E /* GalleryViewModel.swift */,
+				DE6910FA26820C9A005BF23A /* CVLayout.swift */,
+			);
+			path = Gallery;
+			sourceTree = "<group>";
+		};
 		DE6910E72681F3DA005BF23A /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
@@ -219,12 +242,8 @@
 		DE6910FC268212AC005BF23A /* List */ = {
 			isa = PBXGroup;
 			children = (
-				DE6910ED2681F643005BF23A /* GalleryViewController.swift */,
-				DE6910EE2681F643005BF23A /* GalleryViewController.xib */,
-				DE6910F626820BED005BF23A /* GalleryItemCollectionViewCell.swift */,
-				DE6910F726820BED005BF23A /* GalleryItemCollectionViewCell.xib */,
-				DE6910FA26820C9A005BF23A /* CVLayout.swift */,
-				86D2A8D82684B43900055C3E /* GalleryViewModel.swift */,
+				DE1F6E2A2685E4CE001518E4 /* Gallery */,
+				DE1F6E292685E4C8001518E4 /* Item */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -347,6 +366,7 @@
 				DE6910F826820BED005BF23A /* GalleryItemCollectionViewCell.swift in Sources */,
 				86D2A8D72684B29D00055C3E /* ViewModellable.swift in Sources */,
 				DE69110F2682317F005BF23A /* BackgroundDecorationView.swift in Sources */,
+				DE1F6E2C2685E526001518E4 /* GalleryItemViewModel.swift in Sources */,
 				DE6910F526820738005BF23A /* MockupData.swift in Sources */,
 				86D2A8DB2684B7BE00055C3E /* BeerRepository.swift in Sources */,
 				DE6910EF2681F643005BF23A /* GalleryViewController.swift in Sources */,

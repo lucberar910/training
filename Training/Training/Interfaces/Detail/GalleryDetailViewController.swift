@@ -17,24 +17,11 @@ class GalleryDetailViewController: UIViewController, UIScrollViewDelegate, ViewM
     @IBOutlet weak var imageView: UIImageView!
     var cancellables = Set<AnyCancellable>()
     
-//
-//    var beer : Beer?
-//    var isFavorite: Bool = false {
-//        didSet {
-//            if isFavorite {
-//                btn.image = UIImage(systemName: "star.fill")
-//            } else {
-//                btn.image = UIImage(systemName: "star")
-//            }
-//        }
-//    }
-    
     var btn = UIBarButtonItem(
         image: UIImage(systemName: "star"),
         style: .plain,
         target: nil,
         action: nil)
-    
     
     init(viewModel : GalleryDetailViewModel) {
         self.viewModel = viewModel
@@ -44,7 +31,6 @@ class GalleryDetailViewController: UIViewController, UIScrollViewDelegate, ViewM
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     @objc func pressBtn(sender: UIBarButtonItem) {
         viewModel.toggleFav()
