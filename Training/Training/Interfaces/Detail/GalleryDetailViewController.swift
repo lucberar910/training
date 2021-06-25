@@ -14,7 +14,7 @@ class GalleryDetailViewController: UIViewController, UIScrollViewDelegate, ViewM
     var viewModel: GalleryDetailViewModel
     
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var imageView: UIImageView!
+   // @IBOutlet weak var imageView: UIImageView!
     var cancellables = Set<AnyCancellable>()
     
     var btn = UIBarButtonItem(
@@ -48,7 +48,27 @@ class GalleryDetailViewController: UIViewController, UIScrollViewDelegate, ViewM
         self.btn.action = #selector(pressBtn(sender:))
         self.navigationItem.rightBarButtonItem = btn
         bindViewModel()
+        
+        configureUI()
+        configureConstraints()
     }
+    
+    private let imageView : UIImageView = {
+       let imageView = UIImageView()
+       return imageView
+    }()
+    
+    func configureUI(){
+        view.addSubview(imageView)
+    }
+    
+    func configureConstraints(){
+        // imageView
+        imageView.centerYAnchor == view.centerYAnchor
+        imageView.leadingAnchor == view.leadingAnchor
+        imageView.trailingAnchor == view.trailingAnchor
+    }
+    
     
     func bindViewModel(){
         viewModel.$isFav.sink { [weak self] value in
@@ -65,9 +85,9 @@ class GalleryDetailViewController: UIViewController, UIScrollViewDelegate, ViewM
         
         if let string = viewModel.imageUrl {
             let url = URL(string: string)
-            self.imageView!.kf.setImage(with: url, placeholder: UIImage(systemName: "photo.on.rectangle.angled"), options: [.imageModifier(ResizeModifier(maxHeight: imageView.bounds.height))])
+            self.imageView.kf.setImage(with: url, placeholder: UIImage(systemName: "photo.on.rectangle.angled"), options: [.imageModifier(ResizeModifier(maxHeight: imageView.bounds.height))])
         } else {
-            self.imageView!.image = nil
+            self.imageView.image = nil
         }
     }
     

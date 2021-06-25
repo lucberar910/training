@@ -36,7 +36,6 @@
 		DE6910F826820BED005BF23A /* GalleryItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6910F626820BED005BF23A /* GalleryItemCollectionViewCell.swift */; };
 		DE6910FB26820C9A005BF23A /* CVLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6910FA26820C9A005BF23A /* CVLayout.swift */; };
 		DE691100268212F4005BF23A /* GalleryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6910FE268212F4005BF23A /* GalleryDetailViewController.swift */; };
-		DE691101268212F4005BF23A /* GalleryDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE6910FF268212F4005BF23A /* GalleryDetailViewController.xib */; };
 		DE6911072682279B005BF23A /* NewBannerSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6911052682279B005BF23A /* NewBannerSupplementaryView.swift */; };
 		DE6911082682279B005BF23A /* NewBannerSupplementaryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE6911062682279B005BF23A /* NewBannerSupplementaryView.xib */; };
 		DE69110B26822B2E005BF23A /* HeaderSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE69110926822B2E005BF23A /* HeaderSupplementaryView.swift */; };
@@ -78,7 +77,6 @@
 		DE6910F626820BED005BF23A /* GalleryItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		DE6910FA26820C9A005BF23A /* CVLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVLayout.swift; sourceTree = "<group>"; };
 		DE6910FE268212F4005BF23A /* GalleryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryDetailViewController.swift; sourceTree = "<group>"; };
-		DE6910FF268212F4005BF23A /* GalleryDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GalleryDetailViewController.xib; sourceTree = "<group>"; };
 		DE6911052682279B005BF23A /* NewBannerSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewBannerSupplementaryView.swift; sourceTree = "<group>"; };
 		DE6911062682279B005BF23A /* NewBannerSupplementaryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewBannerSupplementaryView.xib; sourceTree = "<group>"; };
 		DE69110926822B2E005BF23A /* HeaderSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderSupplementaryView.swift; sourceTree = "<group>"; };
@@ -248,7 +246,6 @@
 			isa = PBXGroup;
 			children = (
 				DE6910FE268212F4005BF23A /* GalleryDetailViewController.swift */,
-				DE6910FF268212F4005BF23A /* GalleryDetailViewController.xib */,
 				DE1F6E1C2684CD4D001518E4 /* GalleryDetailViewModel.swift */,
 			);
 			path = Detail;
@@ -336,7 +333,6 @@
 			files = (
 				DE6911102682317F005BF23A /* BackgroundDecorationView.xib in Resources */,
 				DE0B29B72681D9D30056862E /* LaunchScreen.storyboard in Resources */,
-				DE691101268212F4005BF23A /* GalleryDetailViewController.xib in Resources */,
 				DE6911082682279B005BF23A /* NewBannerSupplementaryView.xib in Resources */,
 				DE69110C26822B2E005BF23A /* HeaderSupplementaryView.xib in Resources */,
 				DE0B29B42681D9D30056862E /* Assets.xcassets in Resources */,
