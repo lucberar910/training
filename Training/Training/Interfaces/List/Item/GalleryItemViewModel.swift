@@ -10,5 +10,12 @@ import Foundation
 import Combine
 
 class GalleryItemViewModel: ViewModel {
-
+    private let beer : Beer
+    var imageUrl : String? {
+        beer.imageUrl
+    }
+    
+    init(beer : Beer) {
+        self.beer = beer
+    }
 }

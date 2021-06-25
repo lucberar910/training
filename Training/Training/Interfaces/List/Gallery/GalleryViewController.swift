@@ -108,7 +108,9 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
         let item = viewModel.beers[indexPath.row]
         let c = galleryCollectionView.dequeueReusableCell(withReuseIdentifier: "GalleryItemCollectionViewCell", for: indexPath) as! GalleryItemCollectionViewCell
         
-        c.imageUrl = item.imageUrl
+//        let galleryItemViewModel = GalleryItemViewModel(beer: item)
+        c.viewModel = .init(beer: item) // galleryItemViewModel
+//        c.imageUrl = item.imageUrl
         return c
     }
     

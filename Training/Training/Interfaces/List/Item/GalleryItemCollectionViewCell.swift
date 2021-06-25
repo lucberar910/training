@@ -11,15 +11,11 @@ import Kingfisher
 class GalleryItemCollectionViewCell: UICollectionViewCell {
 
     typealias ViewModelType = GalleryItemViewModel
-    var viewModel : GalleryItemViewModel?
-    
-    @IBOutlet weak var imageView: UIImageView!
-    private var downloadTask : DownloadTask?
-    var imageUrl : String? {
+    var viewModel : GalleryItemViewModel? {
         didSet {
             downloadTask?.cancel()
             downloadTask = nil
-            if let string = imageUrl {
+            if let string = self.viewModel?.imageUrl {
                 let url = URL(string: string)
                 downloadTask = imageView.kf.setImage(with: url, placeholder: UIImage(systemName: "photo.on.rectangle.angled"))
             } else {
@@ -27,6 +23,11 @@ class GalleryItemCollectionViewCell: UICollectionViewCell {
             }
         }
     }
+    
+    @IBOutlet weak var imageView: UIImageView!
+    private var downloadTask : DownloadTask?
+    var imageUrl : String?
+   
     
 //    init(viewModel : GalleryItemViewModel) {
 //        self.viewModel = viewModel
