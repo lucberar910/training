@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		061A92E326839A410044BBA6 /* Beer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061A92E226839A410044BBA6 /* Beer.swift */; };
+		061A92FE268623500044BBA6 /* Anchorage in Frameworks */ = {isa = PBXBuildFile; productRef = 061A92FD268623500044BBA6 /* Anchorage */; };
 		863E1F02268345FB008F2F8C /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 863E1F01268345FB008F2F8C /* Kingfisher */; };
 		863E1F0426837321008F2F8C /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863E1F0326837321008F2F8C /* UserDefaultManager.swift */; };
 		86D2A8D52684B23C00055C3E /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D2A8D42684B23C00055C3E /* ViewModel.swift */; };
@@ -30,11 +31,9 @@
 		DE6910E92681F3EE005BF23A /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6910E82681F3EE005BF23A /* Coordinator.swift */; };
 		DE6910EB2681F41F005BF23A /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6910EA2681F41F005BF23A /* MainCoordinator.swift */; };
 		DE6910EF2681F643005BF23A /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6910ED2681F643005BF23A /* GalleryViewController.swift */; };
-		DE6910F02681F643005BF23A /* GalleryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE6910EE2681F643005BF23A /* GalleryViewController.xib */; };
 		DE6910F3268206EE005BF23A /* FeedElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6910F2268206EE005BF23A /* FeedElement.swift */; };
 		DE6910F526820738005BF23A /* MockupData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6910F426820738005BF23A /* MockupData.swift */; };
 		DE6910F826820BED005BF23A /* GalleryItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6910F626820BED005BF23A /* GalleryItemCollectionViewCell.swift */; };
-		DE6910F926820BEE005BF23A /* GalleryItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE6910F726820BED005BF23A /* GalleryItemCollectionViewCell.xib */; };
 		DE6910FB26820C9A005BF23A /* CVLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6910FA26820C9A005BF23A /* CVLayout.swift */; };
 		DE691100268212F4005BF23A /* GalleryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6910FE268212F4005BF23A /* GalleryDetailViewController.swift */; };
 		DE691101268212F4005BF23A /* GalleryDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE6910FF268212F4005BF23A /* GalleryDetailViewController.xib */; };
@@ -74,11 +73,9 @@
 		DE6910E82681F3EE005BF23A /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		DE6910EA2681F41F005BF23A /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		DE6910ED2681F643005BF23A /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
-		DE6910EE2681F643005BF23A /* GalleryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GalleryViewController.xib; sourceTree = "<group>"; };
 		DE6910F2268206EE005BF23A /* FeedElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedElement.swift; sourceTree = "<group>"; };
 		DE6910F426820738005BF23A /* MockupData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockupData.swift; sourceTree = "<group>"; };
 		DE6910F626820BED005BF23A /* GalleryItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryItemCollectionViewCell.swift; sourceTree = "<group>"; };
-		DE6910F726820BED005BF23A /* GalleryItemCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GalleryItemCollectionViewCell.xib; sourceTree = "<group>"; };
 		DE6910FA26820C9A005BF23A /* CVLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVLayout.swift; sourceTree = "<group>"; };
 		DE6910FE268212F4005BF23A /* GalleryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryDetailViewController.swift; sourceTree = "<group>"; };
 		DE6910FF268212F4005BF23A /* GalleryDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GalleryDetailViewController.xib; sourceTree = "<group>"; };
@@ -97,6 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				061A92FE268623500044BBA6 /* Anchorage in Frameworks */,
 				863E1F02268345FB008F2F8C /* Kingfisher in Frameworks */,
 				DE69111626832931005BF23A /* Alamofire in Frameworks */,
 			);
@@ -193,7 +191,6 @@
 			isa = PBXGroup;
 			children = (
 				DE6910F626820BED005BF23A /* GalleryItemCollectionViewCell.swift */,
-				DE6910F726820BED005BF23A /* GalleryItemCollectionViewCell.xib */,
 				DE1F6E2B2685E526001518E4 /* GalleryItemViewModel.swift */,
 			);
 			path = Item;
@@ -203,7 +200,6 @@
 			isa = PBXGroup;
 			children = (
 				DE6910ED2681F643005BF23A /* GalleryViewController.swift */,
-				DE6910EE2681F643005BF23A /* GalleryViewController.xib */,
 				86D2A8D82684B43900055C3E /* GalleryViewModel.swift */,
 				DE6910FA26820C9A005BF23A /* CVLayout.swift */,
 			);
@@ -290,6 +286,7 @@
 			packageProductDependencies = (
 				DE69111526832931005BF23A /* Alamofire */,
 				863E1F01268345FB008F2F8C /* Kingfisher */,
+				061A92FD268623500044BBA6 /* Anchorage */,
 			);
 			productName = Training;
 			productReference = DE0B29A72681D9CF0056862E /* Training.app */;
@@ -321,6 +318,7 @@
 			packageReferences = (
 				DE69111426832931005BF23A /* XCRemoteSwiftPackageReference "Alamofire" */,
 				863E1F00268345FB008F2F8C /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				061A92FC268623500044BBA6 /* XCRemoteSwiftPackageReference "Anchorage" */,
 			);
 			productRefGroup = DE0B29A82681D9CF0056862E /* Products */;
 			projectDirPath = "";
@@ -337,11 +335,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE6911102682317F005BF23A /* BackgroundDecorationView.xib in Resources */,
-				DE6910F926820BEE005BF23A /* GalleryItemCollectionViewCell.xib in Resources */,
 				DE0B29B72681D9D30056862E /* LaunchScreen.storyboard in Resources */,
 				DE691101268212F4005BF23A /* GalleryDetailViewController.xib in Resources */,
 				DE6911082682279B005BF23A /* NewBannerSupplementaryView.xib in Resources */,
-				DE6910F02681F643005BF23A /* GalleryViewController.xib in Resources */,
 				DE69110C26822B2E005BF23A /* HeaderSupplementaryView.xib in Resources */,
 				DE0B29B42681D9D30056862E /* Assets.xcassets in Resources */,
 			);
@@ -577,6 +573,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		061A92FC268623500044BBA6 /* XCRemoteSwiftPackageReference "Anchorage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Rightpoint/Anchorage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.0;
+			};
+		};
 		863E1F00268345FB008F2F8C /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
@@ -596,6 +600,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		061A92FD268623500044BBA6 /* Anchorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 061A92FC268623500044BBA6 /* XCRemoteSwiftPackageReference "Anchorage" */;
+			productName = Anchorage;
+		};
 		863E1F01268345FB008F2F8C /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 863E1F00268345FB008F2F8C /* XCRemoteSwiftPackageReference "Kingfisher" */;

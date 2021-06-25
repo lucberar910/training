@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import Anchorage
 
 class GalleryItemCollectionViewCell: UICollectionViewCell {
 
@@ -24,23 +25,34 @@ class GalleryItemCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    @IBOutlet weak var imageView: UIImageView!
+    // MARK: - UI properties
+    
+    private let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
     private var downloadTask : DownloadTask?
     var imageUrl : String?
    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        configureUI()
+        configureConstraints()
+    }
     
-//    init(viewModel : GalleryItemViewModel) {
-//        self.viewModel = viewModel
-//        //super.init(nibName: nil, bundle: nil)
-//    }
-//
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - Configure methods
+    
+    func configureUI() {
+        contentView.addSubview(imageView)
+    }
+    
+    func configureConstraints() {
+        imageView.edgeAnchors == contentView.edgeAnchors
+    }
 }

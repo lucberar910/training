@@ -8,20 +8,23 @@
 import UIKit
 import Kingfisher
 import Combine
+import Anchorage
 
-protocol GalleryViewControllerDelegate: class {
+protocol GalleryViewControllerDelegate: AnyObject {
     func galleryViewControllerDidSelectElement(_ selectedElement: Beer)
 }
 
-class GalleryViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource,
-                             UISearchBarDelegate, ViewModellable {
+class GalleryViewController: UIViewController, ViewModellable {
     
     typealias ViewModelType = GalleryViewModel
-    
     var viewModel: GalleryViewModel
+    weak var delegate: GalleryViewControllerDelegate?
+    var cancellables = Set<AnyCancellable>()
     
+    // MARK: - UI properties
     
-    let compositionalLayout: UICollectionViewCompositionalLayout = {
+    private let galleryCollectionView: UICollectionView = {
+        // ------ LAYOUT ----- //
         let inset: CGFloat = 2.5
         
         let smallItemSize1 = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(1))
@@ -47,18 +50,26 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
         let section = NSCollectionLayoutSection(group: outerGroup)
         section.contentInsets = NSDirectionalEdgeInsets(top: inset, leading: inset, bottom: inset, trailing: inset)
         
-        return UICollectionViewCompositionalLayout(section: section)
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        // ------ END LAYOUT ------ //
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = UIColor.darkGray
+        collectionView.layer.cornerRadius = 20
+        collectionView.layer.masksToBounds = true
+        return collectionView
     }()
-    // -------------------------------- COMPOSITIONAL LAYOUT
     
+    private let searchField = UISearchBar()
     
+    private let labelEmpty: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        return label
+    }()
     
-    
-    @IBOutlet weak var galleryCollectionView: UICollectionView!
-    @IBOutlet weak var searchField: UISearchBar!
-    weak var delegate: GalleryViewControllerDelegate?
-    @IBOutlet weak var labelEmpty: UILabel!
-    var cancellables = Set<AnyCancellable>()
+    // MARK: - Object lifecycle
     
     init(viewModel: GalleryViewModel, delegate: GalleryViewControllerDelegate ) {
         self.viewModel = viewModel
@@ -72,19 +83,13 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.galleryCollectionView.dataSource = self
-        self.galleryCollectionView.delegate = self
-        self.searchField.delegate = self
-        // supplementary item (banner sopra gli item)
-        self.galleryCollectionView.register(UINib(nibName: "NewBannerSupplementaryView", bundle: nil), forSupplementaryViewOfKind: "new-banner", withReuseIdentifier: "NewBannerSupplementaryView")
-            
-        // cell
-        self.galleryCollectionView.collectionViewLayout = compositionalLayout
-        self.galleryCollectionView.register(UINib(nibName: "GalleryItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "GalleryItemCollectionViewCell")
-
+        configureUI()
+        configureConstraints()
         // subscriber
         bindViewModel()
     }
+    
+    // MARK: - Bind methods
     
     func bindViewModel(){
         viewModel.$itemViewModels.sink { [weak self] items in
@@ -101,6 +106,46 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
         .store(in: &cancellables)
     }
     
+    // MARK: - Configure methods
+    
+    func configureUI() {
+        // galleryCollectionView
+        self.galleryCollectionView.dataSource = self
+        self.galleryCollectionView.delegate = self
+        // supplementary item (banner sopra gli item)
+        self.galleryCollectionView.register(UINib(nibName: "NewBannerSupplementaryView", bundle: nil), forSupplementaryViewOfKind: "new-banner", withReuseIdentifier: "NewBannerSupplementaryView")
+        // cell
+        self.galleryCollectionView.register(GalleryItemCollectionViewCell.self, forCellWithReuseIdentifier: "GalleryItemCollectionViewCell")
+        view.addSubview(galleryCollectionView)
+        
+        // searchField
+        self.searchField.delegate = self
+        view.addSubview(searchField)
+        
+        // labelEmpty
+        view.addSubview(labelEmpty)
+    }
+    
+    func configureConstraints() {
+        // searchField
+        searchField.topAnchor == view.safeAreaLayoutGuide.topAnchor + 25
+        searchField.horizontalAnchors == view.horizontalAnchors
+        searchField.heightAnchor == 51
+        
+        // galleryCollectionView
+        galleryCollectionView.topAnchor == searchField.bottomAnchor
+        galleryCollectionView.horizontalAnchors == view.horizontalAnchors
+        
+        // labelEmpty
+        labelEmpty.horizontalAnchors == view.horizontalAnchors + 32
+        labelEmpty.centerYAnchor == view.centerYAnchor
+    }
+}
+
+
+
+// MARK: - UICollectionViewDelegate & UICollectionViewDataSource
+extension GalleryViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.itemViewModels.count
         
@@ -120,7 +165,13 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
         let item = viewModel.itemViewModels[indexPath.row]
         delegate?.galleryViewControllerDidSelectElement(item.beer)
     }
-    
+}
+
+
+
+
+// MARK: - UISearchBarDelegate
+extension GalleryViewController: UISearchBarDelegate {
     // tasto cerca
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder() // chiude la testiera
@@ -150,6 +201,4 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
         //            }
         //        }
     }
-    
-    
 }
