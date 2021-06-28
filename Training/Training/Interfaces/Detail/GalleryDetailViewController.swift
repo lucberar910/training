@@ -8,6 +8,7 @@
 import UIKit
 import Kingfisher
 import Combine
+import Anchorage
 
 class GalleryDetailViewController: UIViewController, UIScrollViewDelegate, ViewModellable {
     typealias ViewModelType = GalleryDetailViewModel
@@ -42,16 +43,16 @@ class GalleryDetailViewController: UIViewController, UIScrollViewDelegate, ViewM
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.scrollView.delegate = self
-        self.scrollView.minimumZoomScale = 1
-        self.scrollView.zoomScale = 1
-        self.scrollView.maximumZoomScale = 2
+//        self.scrollView.delegate = self
+//        self.scrollView.minimumZoomScale = 1
+//        self.scrollView.zoomScale = 1
+//        self.scrollView.maximumZoomScale = 2
         
         self.btn.target = self
         self.btn.action = #selector(pressBtn(sender:))
         self.navigationItem.rightBarButtonItem = btn
         bindViewModel()
-        
+    
         configureUI()
         configureConstraints()
     }
@@ -70,7 +71,8 @@ class GalleryDetailViewController: UIViewController, UIScrollViewDelegate, ViewM
     
     func configureConstraints(){
         // imageView
-        imageView.centerYAnchor == view.centerYAnchor
+        imageView.verticalAnchors >= view.safeAreaLayoutGuide.verticalAnchors + 20
+        imageView.centerYAnchor == view.safeAreaLayoutGuide.centerYAnchor 
         imageView.leadingAnchor == view.leadingAnchor
         imageView.trailingAnchor == view.trailingAnchor
     }

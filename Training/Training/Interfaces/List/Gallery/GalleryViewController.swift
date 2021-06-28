@@ -93,7 +93,9 @@ class GalleryViewController: UIViewController, ViewModellable {
     // MARK: - Bind methods
     
     func bindViewModel(){
-        viewModel.$itemViewModels.sink { [weak self] items in
+        viewModel.$itemViewModels
+            .receive(on: RunLoop.main)
+            .sink { [weak self] items in
             if(items.count == 0){
                 self?.labelEmpty.isHidden = false
                 self?.labelEmpty.text = "Nessun risultato"
