@@ -15,13 +15,9 @@ protocol UserDefaultManagerProtocol {
 }
 
 class UserDefaultManager : UserDefaultManagerProtocol {
-    
-   // static let shared = UserDefaultManager()
-
     func addFav(id: Int){
         var ids = UserDefaults.standard.object(forKey: "beers") as? [Int] ?? [Int]()
         ids.append(id)
-    
         UserDefaults.standard.set(ids, forKey: "beers")
         UserDefaults.standard.synchronize()
     }
@@ -35,7 +31,7 @@ class UserDefaultManager : UserDefaultManagerProtocol {
     }
     
     func isFav(id: Int) -> Bool {
-        var ids = UserDefaults.standard.object(forKey: "beers") as? [Int] ?? [Int]()
+        let ids = UserDefaults.standard.object(forKey: "beers") as? [Int] ?? [Int]()
         return ids.contains(id)
     }
 }

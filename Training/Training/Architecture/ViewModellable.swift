@@ -10,5 +10,4 @@ import Foundation
 protocol ViewModellable {
     associatedtype ViewModelType : ViewModel
     var viewModel : ViewModelType { get set }
-    
 }

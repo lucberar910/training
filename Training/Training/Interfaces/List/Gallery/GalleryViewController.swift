@@ -66,6 +66,7 @@ class GalleryViewController: UIViewController, ViewModellable {
         let label = UILabel()
         label.textAlignment = .center
         label.numberOfLines = 0
+        label.textColor = UIColor.label
         return label
     }()
     
@@ -109,6 +110,7 @@ class GalleryViewController: UIViewController, ViewModellable {
     // MARK: - Configure methods
     
     func configureUI() {
+        view.backgroundColor = UIColor.white
         // galleryCollectionView
         self.galleryCollectionView.dataSource = self
         self.galleryCollectionView.delegate = self
@@ -128,13 +130,14 @@ class GalleryViewController: UIViewController, ViewModellable {
     
     func configureConstraints() {
         // searchField
-        searchField.topAnchor == view.safeAreaLayoutGuide.topAnchor + 25
+        searchField.topAnchor == view.safeAreaLayoutGuide.topAnchor
         searchField.horizontalAnchors == view.horizontalAnchors
         searchField.heightAnchor == 51
         
         // galleryCollectionView
         galleryCollectionView.topAnchor == searchField.bottomAnchor
         galleryCollectionView.horizontalAnchors == view.horizontalAnchors
+        galleryCollectionView.bottomAnchor == view.bottomAnchor
         
         // labelEmpty
         labelEmpty.horizontalAnchors == view.horizontalAnchors + 32
@@ -148,15 +151,13 @@ class GalleryViewController: UIViewController, ViewModellable {
 extension GalleryViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.itemViewModels.count
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let item = viewModel.itemViewModels[indexPath.row]
         let c = galleryCollectionView.dequeueReusableCell(withReuseIdentifier: "GalleryItemCollectionViewCell", for: indexPath) as! GalleryItemCollectionViewCell
         
-//        let galleryItemViewModel = GalleryItemViewModel(beer: item)
-        c.viewModel = item //.init(beer: item) // galleryItemViewModel
+        c.viewModel = item //.init(beer: item) .init di GalleryItemViewModel
 //        c.imageUrl = item.imageUrl
         return c
     }
@@ -166,8 +167,6 @@ extension GalleryViewController: UICollectionViewDelegate, UICollectionViewDataS
         delegate?.galleryViewControllerDidSelectElement(item.beer)
     }
 }
-
-
 
 
 // MARK: - UISearchBarDelegate

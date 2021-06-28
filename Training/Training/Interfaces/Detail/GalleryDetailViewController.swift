@@ -23,6 +23,9 @@ class GalleryDetailViewController: UIViewController, UIScrollViewDelegate, ViewM
         target: nil,
         action: nil)
     
+    
+    // MARK: - Object lifecycle
+    
     init(viewModel : GalleryDetailViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -53,10 +56,13 @@ class GalleryDetailViewController: UIViewController, UIScrollViewDelegate, ViewM
         configureConstraints()
     }
     
-    private let imageView : UIImageView = {
-       let imageView = UIImageView()
-       return imageView
+    private let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        return imageView
     }()
+    
+    // MARK: - Configure methods
     
     func configureUI(){
         view.addSubview(imageView)
@@ -69,6 +75,7 @@ class GalleryDetailViewController: UIViewController, UIScrollViewDelegate, ViewM
         imageView.trailingAnchor == view.trailingAnchor
     }
     
+    // MARK: - Bind methods
     
     func bindViewModel(){
         viewModel.$isFav.sink { [weak self] value in

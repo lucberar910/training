@@ -10,6 +10,7 @@ import Foundation
 import Combine
 
 protocol BeerRepositoryProtocol {
+//    func search(_ text : String, completion : @escaping (Result<[Beer],Error>) -> Void)
     func search(_ text: String) -> AnyPublisher<[Beer],Error>
     func addFav(id: Int)
     func removeFav(id: Int)
@@ -27,7 +28,6 @@ public class BeerRepository{
 }
 
 extension BeerRepository: BeerRepositoryProtocol {
-    
     func addFav(id: Int) {
         self.userDefault.addFav(id: id)
     }
@@ -40,6 +40,9 @@ extension BeerRepository: BeerRepositoryProtocol {
        return self.userDefault.isFav(id: id)
     }
     
+//  --- closure
+//  func search(_ text: String, completion: @escaping (Result<[Beer], Error>) -> Void) {
+//  --- combine
     func search(_ text: String) -> AnyPublisher<[Beer],Error>{
        return self.network.search(text)
     }
