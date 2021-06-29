@@ -13,6 +13,7 @@ class GalleryViewModel: ViewModel {
     
     var searchUseCase : SearchUseCaseProtocol
     @Published var itemViewModels : [GalleryItemViewModel] = []
+    @Published var selectedBeer : Beer?
     var cancellables = Set<AnyCancellable>()
     
     init(container : MainContainerProtocol) {
@@ -20,23 +21,28 @@ class GalleryViewModel: ViewModel {
     }
     
     //  --- combine
-        func search(text : String){
-            self.searchUseCase.execute(text: text)
-                .receive(on: RunLoop.main)
-                .map{ beers in
-                    let items = beers.map{ beer -> GalleryItemViewModel in
-                        let item = GalleryItemViewModel(beer: beer)
-                        return item
-                    }
-                    return items
+    func search(text : String){
+        self.searchUseCase.execute(text: text)
+            .receive(on: RunLoop.main)
+            .map{ beers in
+                let items = beers.map{ beer -> GalleryItemViewModel in
+                    let item = GalleryItemViewModel(beer: beer)
+                    return item
                 }
-                .sink(receiveCompletion: { completion in
-                    
-                }, receiveValue: { items in
-                    self.itemViewModels = items
-                    
-                }).store(in: &cancellables)
-        }
+                return items
+            }
+            .sink(receiveCompletion: { completion in
+                
+            }, receiveValue: { items in
+                self.itemViewModels = items
+                
+            }).store(in: &cancellables)
+    }
+    
+    func didSelectBeer(indexPath: IndexPath){
+        let item = itemViewModels[indexPath.row]
+        self.selectedBeer = item.beer
+    }
 
     
 //    --- closure

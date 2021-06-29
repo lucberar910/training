@@ -15,6 +15,17 @@ protocol GalleryViewControllerDelegate: AnyObject {
 }
 
 class GalleryViewController: UIViewController, ViewModellable {
+    enum Section {
+      case main
+    }
+    
+    // MARK: - Properties
+   // private var sections = Section.allSections
+    private lazy var dataSource = makeDataSource()
+    
+    // MARK: - Value Types
+    typealias DataSource = UICollectionViewDiffableDataSource<Section, GalleryItemViewModel>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, GalleryItemViewModel>
     
     typealias ViewModelType = GalleryViewModel
     var viewModel: GalleryViewModel
@@ -88,6 +99,15 @@ class GalleryViewController: UIViewController, ViewModellable {
         configureConstraints()
         // subscriber
         bindViewModel()
+        applySnapshot(animatingDifferences: false)
+    }
+    
+    
+    func applySnapshot(animatingDifferences: Bool = true) {
+      var snapshot = Snapshot()
+      snapshot.appendSections([.main])
+      snapshot.appendItems(viewModel.itemViewModels)
+      dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
     }
     
     // MARK: - Bind methods
@@ -96,15 +116,21 @@ class GalleryViewController: UIViewController, ViewModellable {
         viewModel.$itemViewModels 
             .receive(on: RunLoop.main)
             .sink { [weak self] items in
-            if(items.count == 0){
-                self?.labelEmpty.isHidden = false
-                self?.labelEmpty.text = "Nessun risultato"
-                self?.galleryCollectionView.isHidden = true
-            } else {
-                self?.labelEmpty.isHidden = true
-                self?.galleryCollectionView.isHidden = false
-            }
-            self?.galleryCollectionView.reloadData()
+                if(items.count == 0){
+                    self?.labelEmpty.isHidden = false
+                    self?.labelEmpty.text = "Nessun risultato"
+                    self?.galleryCollectionView.isHidden = true
+                } else {
+                    self?.labelEmpty.isHidden = true
+                    self?.galleryCollectionView.isHidden = false
+                }
+                self?.galleryCollectionView.reloadData()
+        }
+        .store(in: &cancellables)
+        
+        viewModel.$selectedBeer.sink { [weak self] beer in
+            guard let beer = beer else { return }
+            self?.delegate?.galleryViewControllerDidSelectElement(beer)
         }
         .store(in: &cancellables)
     }
@@ -113,13 +139,12 @@ class GalleryViewController: UIViewController, ViewModellable {
     
     func configureUI() {
         view.backgroundColor = UIColor.white
-        // galleryCollectionView
-        self.galleryCollectionView.dataSource = self
-        self.galleryCollectionView.delegate = self
+
         // supplementary item (banner sopra gli item)
         self.galleryCollectionView.register(UINib(nibName: "NewBannerSupplementaryView", bundle: nil), forSupplementaryViewOfKind: "new-banner", withReuseIdentifier: "NewBannerSupplementaryView")
         // cell
         self.galleryCollectionView.register(GalleryItemCollectionViewCell.self, forCellWithReuseIdentifier: "GalleryItemCollectionViewCell")
+        self.galleryCollectionView.delegate = self
         view.addSubview(galleryCollectionView)
         
         // searchField
@@ -150,23 +175,37 @@ class GalleryViewController: UIViewController, ViewModellable {
 
 
 // MARK: - UICollectionViewDelegate & UICollectionViewDataSource
-extension GalleryViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.itemViewModels.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let item = viewModel.itemViewModels[indexPath.row]
-        let c = galleryCollectionView.dequeueReusableCell(withReuseIdentifier: "GalleryItemCollectionViewCell", for: indexPath) as! GalleryItemCollectionViewCell
-        
-        c.viewModel = item //.init(beer: item) .init di GalleryItemViewModel
-//        c.imageUrl = item.imageUrl
-        return c
-    }
-    
+extension GalleryViewController : UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let item = viewModel.itemViewModels[indexPath.row]
-        delegate?.galleryViewControllerDidSelectElement(item.beer)
+        self.viewModel.didSelectBeer(indexPath: indexPath)
+    }
+    
+    func makeDataSource() -> DataSource {
+      let dataSource = DataSource(
+        collectionView: galleryCollectionView,
+        cellProvider: { (galleryCollectionView, indexPath, beer) ->
+            GalleryItemCollectionViewCell? in
+            let item = self.viewModel.itemViewModels[indexPath.row]
+          let cell = galleryCollectionView.dequeueReusableCell(
+            withReuseIdentifier: "GalleryItemCollectionViewCell",
+            for: indexPath) as? GalleryItemCollectionViewCell
+            cell!.viewModel = item
+          return cell
+      })
+//      dataSource.supplementaryViewProvider = { galleryCollectionView, kind, indexPath in
+//        guard kind == UICollectionView.elementKindSectionHeader else {
+//          return nil
+//        }
+//        let section = self.dataSource.snapshot()
+//          .sectionIdentifiers[indexPath.section]
+//        let view = collectionView.dequeueReusableSupplementaryView(
+//          ofKind: kind,
+//          withReuseIdentifier: SectionHeaderReusableView.reuseIdentifier,
+//          for: indexPath) as? SectionHeaderReusableView
+//        view?.titleLabel.text = section.title
+//        return view
+//      }
+      return dataSource
     }
 }
 
@@ -180,6 +219,7 @@ extension GalleryViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         viewModel.search(text: searchText)
+        applySnapshot()
         
         //        NetworkManager.shared.search(searchField.text!) { [weak self] result in
         //            // metodo completion richiamato dal network manager

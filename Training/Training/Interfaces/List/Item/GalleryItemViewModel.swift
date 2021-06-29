@@ -9,7 +9,8 @@
 import Foundation
 import Combine
 
-class GalleryItemViewModel: ViewModel {
+class GalleryItemViewModel: ViewModel, Hashable {
+    var id: Int?
     let beer : Beer
     var imageUrl : String? {
         beer.imageUrl
@@ -17,5 +18,13 @@ class GalleryItemViewModel: ViewModel {
     
     init(beer : Beer) {
         self.beer = beer
+    }
+    
+    func hash(into hasher: inout Hasher) {
+      hasher.combine(id)
+    }
+    
+    static func == (lhs: GalleryItemViewModel, rhs: GalleryItemViewModel) -> Bool {
+        lhs.id == rhs.id
     }
 }
